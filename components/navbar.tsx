@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       {open && (
-        <div className="fixed h-full w-full bg-white shadow-lg">
+        <div className="fixed w-full bg-white shadow-lg">
           <ul>
             <li>
               <Link href="/blog">Blog</Link>
