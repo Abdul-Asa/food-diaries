@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       {/* Abstract into Hero component*/}
-      <section className="mt-2 flex h-[calc(100vh-76px)] flex-col border p-3 md:mt-4 md:h-[calc(100vh-104px)] md:p-8">
+      <section className="mt-2 flex h-[calc(100svh-76px)] flex-col border p-3 md:mt-4 md:h-[calc(100vh-104px)] md:p-8">
         <div
           className="rellax flex h-full flex-col justify-center md:w-[80%]"
           data-rellax-speed="-2"
