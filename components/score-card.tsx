@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 export default function ScoreCard() {
   return (
     <motion.div
+      drag
+      dragSnapToOrigin
+      whileDrag={{ scale: 0.9, transition: { duration: 0.1 } }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{

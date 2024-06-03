@@ -3,7 +3,7 @@ import ScoreCard from "@/components/score-card";
 import { WordPullUp } from "@/components/text-animation";
 import { useScroll, useTransform, motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Rellax from "rellax";
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
       </section>
 
       {/* Abstract into filter component*/}
-      <div className="sticky top-0 z-10 bg-pale">
+      <div className="sticky top-0 bg-pale">
         <div className="h-2 w-full" />
         <div className="flex justify-center border">
           <div className="flex w-full max-w-[1000px] justify-between border-x bg-pale font-semibold">
