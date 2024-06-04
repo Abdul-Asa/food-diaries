@@ -3,7 +3,6 @@ import { Poppins, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
 import Navbar from "@/components/navbar";
-import Script from "next/script";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -41,7 +40,6 @@ export default function RootLayout({
           {children}
         </main>
       </body>
-      <Script src="https://cdn.lordicon.com/lordicon.js" />
     </html>
   );
 }

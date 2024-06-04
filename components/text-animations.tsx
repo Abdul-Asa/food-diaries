@@ -10,7 +10,7 @@ interface WordPullUpProps {
   className?: string;
 }
 
-export function WordPullUp({
+export function HeroText({
   words,
   wrapperFramerProps = {
     hidden: { opacity: 0 },

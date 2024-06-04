@@ -1,7 +1,17 @@
 "use client";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import Rellax from "rellax";
 
-export default function ScoreCard() {
+export function SampleScoreCard() {
+  // Parallax effect on Hero Section
+  useEffect(() => {
+    const rellax = new Rellax(".rellax");
+    return () => {
+      rellax.destroy();
+    };
+  });
+
   return (
     <motion.div
       drag

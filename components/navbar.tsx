@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Player } from "@lottiefiles/react-lottie-player";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -11,7 +11,7 @@ const navLinks = [
   { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
 ];
-const menuVars = {
+const menuVariant = {
   initial: {
     scaleY: 0,
   },
@@ -31,7 +31,7 @@ const menuVars = {
     },
   },
 };
-const containerVars = {
+const containerVariant = {
   initial: {
     transition: {
       staggerChildren: 0.09,
@@ -46,49 +46,54 @@ const containerVars = {
     },
   },
 };
+const mobileLinkVariant = {
+  initial: {
+    y: "30vh",
+    transition: {
+      duration: 0.5,
+      ease: [0.37, 0, 0.63, 1],
+    },
+  },
+  open: {
+    y: 0,
+    transition: {
+      ease: [0, 0.55, 0.45, 1],
+      duration: 0.7,
+    },
+  },
+};
 
 const Navbar: React.FC = () => {
-  const playerRef = useRef<any>(null);
+  const playerRef = useRef<Player>(null);
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      setOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  });
   const toggleMenu = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+
+  // For hamburger menu animation
   const handleClick = () => {
     if (playerRef.current) {
       if (open) {
         playerRef.current.setPlayerDirection(-1);
         playerRef.current.setPlayerSpeed(2);
-        playerRef.current.play();
       } else {
         playerRef.current.setPlayerDirection(1);
         playerRef.current.setPlayerSpeed(1);
-        playerRef.current.play();
       }
+      playerRef.current.play();
     }
     toggleMenu();
   };
 
   return (
-    <nav className="relative z-10 bg-pale">
+    <nav className="sticky top-0 z-10 bg-pale">
       <div className="h-2 w-full md:h-4" />
       <div className="flex justify-between border text-[clamp(1rem,1vw,4rem)]">
         <div className="flex font-semibold">
           <Link href={"/"} className="hidden border-r bg-main md:block">
-            <Image src="/logo.png" alt="logo" width={60} height={60} />
+            <Image src="/icons/logo.png" alt="logo" width={60} height={60} />
           </Link>
           <Link
             href={"/"}
@@ -114,13 +119,17 @@ const Navbar: React.FC = () => {
         <div className="flex md:hidden">
           <button
             onClick={handleClick}
-            className="flex items-center border-l px-6 py-2 transition-colors duration-200 hover:bg-main hover:text-white"
+            className="flex items-center border-l px-6 py-2 transition-colors duration-200 hover:bg-main/50 hover:text-white"
           >
             <Player
               ref={playerRef}
               keepLastFrame={true}
-              src="/menu.json"
-              style={{ height: "30px", width: "30px" }}
+              src={"/icons/menu.json"}
+              renderer={"svg"}
+              style={{
+                height: "30px",
+                width: "30px",
+              }}
             ></Player>
           </button>
         </div>
@@ -129,14 +138,14 @@ const Navbar: React.FC = () => {
         {open && (
           <motion.div
             ref={menuRef}
-            variants={menuVars}
+            variants={menuVariant}
             initial="initial"
             animate="animate"
             exit="exit"
             className="absolute flex w-full origin-top border-x border-b bg-pale"
           >
             <motion.div
-              variants={containerVars}
+              variants={containerVariant}
               initial="initial"
               animate="open"
               exit="initial"
@@ -167,26 +176,10 @@ const Navbar: React.FC = () => {
   );
 };
 
-const mobileLinkVars = {
-  initial: {
-    y: "30vh",
-    transition: {
-      duration: 0.5,
-      ease: [0.37, 0, 0.63, 1],
-    },
-  },
-  open: {
-    y: 0,
-    transition: {
-      ease: [0, 0.55, 0.45, 1],
-      duration: 0.7,
-    },
-  },
-};
 const MobileNavLink = ({ title, href }: { title: string; href: string }) => {
   return (
     <motion.div
-      variants={mobileLinkVars}
+      variants={mobileLinkVariant}
       className="flex cursor-pointer items-center text-3xl uppercase transition-colors hover:text-main"
     >
       <Link href={href}>{title}</Link>
