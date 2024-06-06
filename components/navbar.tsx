@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Player } from "@lottiefiles/react-lottie-player";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { MenuButton } from "./menu-button";
 
 const navLinks = [
   { title: "Blog", href: "/blog" },
@@ -64,31 +64,14 @@ const mobileLinkVariant = {
 };
 
 const Navbar: React.FC = () => {
-  const playerRef = useRef<Player>(null);
   const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
+  const [isHovered, setIsHovered] = useState(false);
   const toggleMenu = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  // For hamburger menu animation
-  const handleClick = () => {
-    if (playerRef.current) {
-      if (open) {
-        playerRef.current.setPlayerDirection(-1);
-        playerRef.current.setPlayerSpeed(2);
-      } else {
-        playerRef.current.setPlayerDirection(1);
-        playerRef.current.setPlayerSpeed(1);
-      }
-      playerRef.current.play();
-    }
-    toggleMenu();
-  };
-
   return (
-    <nav className="sticky top-0 z-10 bg-pale">
+    <nav className="sticky top-0 z-20 bg-pale">
       <div className="h-2 w-full md:h-4" />
       <div className="flex justify-between border text-[clamp(1rem,1vw,4rem)]">
         <div className="flex font-semibold">
@@ -116,28 +99,27 @@ const Navbar: React.FC = () => {
             );
           })}
         </div>
+        {/* Mobile menu button */}
         <div className="flex md:hidden">
           <button
-            onClick={handleClick}
-            className="flex items-center border-l px-6 py-2 transition-colors duration-200 hover:bg-main/50 hover:text-white"
+            onClick={toggleMenu}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="flex items-center border-l px-6 py-2 transition-colors duration-200 hover:bg-main hover:text-white"
           >
-            <Player
-              ref={playerRef}
-              keepLastFrame={true}
-              src={"/icons/menu.json"}
-              renderer={"svg"}
-              style={{
-                height: "30px",
-                width: "30px",
-              }}
-            ></Player>
+            <MenuButton
+              strokeWidth={2}
+              isOpen={open}
+              color={isHovered ? "white" : "black"}
+              height={16}
+              width={32}
+            />
           </button>
         </div>
       </div>
       <AnimatePresence>
         {open && (
           <motion.div
-            ref={menuRef}
             variants={menuVariant}
             initial="initial"
             animate="animate"

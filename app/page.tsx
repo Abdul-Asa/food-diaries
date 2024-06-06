@@ -17,7 +17,7 @@ export default function Home() {
           />
         </div>
         <div
-          className="rellax flex h-full items-center justify-center p-4 md:justify-end"
+          className="rellax z-10 flex h-full items-center justify-center p-4 md:justify-end"
           data-rellax-speed="1"
           data-rellax-zindex="1"
         >
