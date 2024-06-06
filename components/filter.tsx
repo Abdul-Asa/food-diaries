@@ -14,10 +14,10 @@ export default function FilterComponent() {
         <div
           className={cn(
             "pointer-events-none absolute left-0",
-            "flex items-center gap-1 text-slate-500",
+            "flex items-center gap-1",
             "transition-all duration-500",
             isFocused || inputValue
-              ? "left-2 pr-2"
+              ? "left-2 mr-2"
               : "left-1/2 -translate-x-1/2",
           )}
         >
@@ -44,19 +44,19 @@ export default function FilterComponent() {
 
       <div className="flex border-t text-xs sm:border-0 sm:text-sm">
         <div className="flex w-full items-center justify-center px-4 sm:border-l md:border-0">
-          <Checkbox id="c-1">
+          <Checkbox id="review">
             <Checkbox.Indicator />
             <Checkbox.Label>Reviewed</Checkbox.Label>
           </Checkbox>
         </div>
 
         <div className="flex w-full items-center gap-2 border-l px-4 md:border-x">
-          <label htmlFor="sort" className="sm:min-w-16">
+          <label htmlFor="sort" className="min-w-16">
             Sort by:
           </label>
           <select
             defaultValue="alpha"
-            className="w-full py-2 focus-visible:outline-main"
+            className="flex w-full py-2 focus-visible:outline-main sm:w-fit"
           >
             <option value="alpha">A-Z</option>
             <option value="date">Date reviewed</option>

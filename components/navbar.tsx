@@ -76,13 +76,13 @@ const Navbar: React.FC = () => {
       <div className="flex justify-between border text-[clamp(1rem,1vw,4rem)]">
         <div className="flex font-semibold">
           <Link href={"/"} className="hidden border-r bg-main md:block">
-            <Image src="/icons/logo.png" alt="logo" width={60} height={60} />
+            <Image src="/icons/logo.png" alt="logo" width={40} height={40} />
           </Link>
           <Link
             href={"/"}
             className={cn(
               "focus-visible:outline-main",
-              "flex items-center border-r px-6 py-2 transition-colors duration-200 hover:bg-main hover:text-white",
+              "flex items-center border-r px-6 py-1 transition-colors duration-200 hover:bg-main hover:text-white",
             )}
           >
             Food diaries
@@ -97,7 +97,7 @@ const Navbar: React.FC = () => {
                 href={link.href}
                 className={cn(
                   "focus-visible:outline-main",
-                  "flex items-center border-l px-6 py-2 transition-colors duration-200 hover:bg-main hover:text-white",
+                  "flex items-center border-l px-6 py-1 transition-colors duration-200 hover:bg-main hover:text-white",
                 )}
               >
                 {link.title}

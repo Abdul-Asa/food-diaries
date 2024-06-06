@@ -2,12 +2,29 @@ import FilterComponent from "./filter";
 
 export default function ShopList() {
   return (
-    <div className="sticky top-12 z-10 bg-pale md:top-20">
-      <div className="h-2 w-full" />
-      <div className="flex justify-center border">
-        <FilterComponent />
+    <section className="flex flex-col">
+      {/* Header  */}
+      <div className="sticky top-10 z-10 bg-pale md:top-14">
+        <div className="h-2 w-full" />
+        <div className="flex justify-center border">
+          <FilterComponent />
+        </div>
       </div>
-    </div>
+
+      {/*  List */}
+      <div className="flex w-full justify-center border-x">
+        <div className="grid w-full max-w-3xl grid-cols-1 gap-x-4 self-center md:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 20 }, (_, i) => i + 1).map((i) => (
+            <div
+              key={i}
+              className="col-span-1 grid h-40 items-center justify-center border-x border-b bg-teal-300 lg:col-span-3"
+            >
+              Dairy {i}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
