@@ -1,24 +1,11 @@
-import Link from "next/link";
+import FilterComponent from "./filter";
 
 export default function ShopList() {
   return (
-    <div className="sticky top-0 bg-pale">
+    <div className="sticky top-12 z-10 bg-pale md:top-20">
       <div className="h-2 w-full" />
       <div className="flex justify-center border">
-        <div className="flex w-full max-w-[1000px] justify-between border-x bg-pale font-semibold">
-          <Link
-            href={"/"}
-            className="flex items-center border-r px-6 py-2 hover:bg-main hover:text-white"
-          >
-            Food diaries
-          </Link>
-          <Link
-            href={"/"}
-            className="flex items-center border-l px-6 py-2 hover:bg-main hover:text-white"
-          >
-            Food diaries
-          </Link>
-        </div>
+        <FilterComponent />
       </div>
     </div>
   );
