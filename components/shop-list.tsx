@@ -1,4 +1,5 @@
 import FilterComponent from "./filter";
+import Image from "next/image";
 
 export default function ShopList() {
   return (
@@ -17,9 +18,33 @@ export default function ShopList() {
           {Array.from({ length: 20 }, (_, i) => i + 1).map((i) => (
             <div
               key={i}
-              className="col-span-1 grid h-40 items-center justify-center border-x border-b bg-teal-300 lg:col-span-3"
+              className="col-span-1 flex items-center border-x border-b lg:col-span-3"
             >
-              Dairy {i}
+              <div className="relative h-[200px] w-[300px]">
+                <Image
+                  // className="rellax"
+                  src={
+                    i % 2 === 0
+                      ? "/assets/corniche-thumb.jpeg"
+                      : i % 3 === 0
+                        ? "/assets/Zorbas-thumb.jpeg"
+                        : "/assets/SKH-thumb.jpeg"
+                  }
+                  alt="kebab"
+                  fill
+                  objectFit="cover"
+                  // data-rellax-speed="1.2"
+                  // data-rellax-zindex="2"
+                />
+              </div>
+              <div className="flex flex-col gap-1 text-center md:gap-2 md:p-4">
+                <h2 className="font-ibm text-[clamp(1rem,1.5vw,4rem)] font-semibold">
+                  GDK
+                </h2>
+                <p className="text-[clamp(1.85rem,5vw,10rem)] font-bold text-main">
+                  100
+                </p>
+              </div>
             </div>
           ))}
         </div>

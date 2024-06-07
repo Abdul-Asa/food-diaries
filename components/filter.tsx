@@ -33,7 +33,7 @@ export default function FilterComponent() {
         </div>
         <input
           className={cn(
-            "flex w-full items-center bg-pale px-6 py-2 pl-10",
+            "flex w-full items-center bg-pale px-6 py-2 pl-10 text-base",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-main",
           )}
           onFocus={() => setIsFocused(true)}
