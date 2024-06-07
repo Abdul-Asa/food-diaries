@@ -43,7 +43,7 @@ export default function FilterComponent() {
       </div>
 
       <div className="flex border-t text-xs sm:border-0 sm:text-sm">
-        <div className="flex w-full items-center justify-center px-4 sm:border-l md:border-0">
+        <div className="flex w-full items-center justify-center px-4 py-2 sm:border-l md:border-0">
           <Checkbox id="review">
             <Checkbox.Indicator />
             <Checkbox.Label>Reviewed</Checkbox.Label>
