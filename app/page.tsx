@@ -1,36 +1,21 @@
-import { SampleScoreCard } from "@/components/score-cards";
-import ShopList from "@/components/shop-list";
-import { HeroText } from "@/components/text-animations";
+import { BlogPosts } from 'app/components/posts'
 
-export default function Home() {
+export default function Page() {
   return (
-    <main className="flex flex-col">
-      {/* Hero section */}
-      <HeroSection />
-
-      {/* Shop Broswer section*/}
-      <ShopList />
-    </main>
-  );
+    <section>
+      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
+        My Portfolio
+      </h1>
+      <p className="mb-4">
+        {`I'm a Vim enthusiast and tab advocate, finding unmatched efficiency in
+        Vim's keystroke commands and tabs' flexibility for personal viewing
+        preferences. This extends to my support for static typing, where its
+        early error detection ensures cleaner code, and my preference for dark
+        mode, which eases long coding sessions by reducing eye strain.`}
+      </p>
+      <div className="my-8">
+        <BlogPosts />
+      </div>
+    </section>
+  )
 }
-
-const HeroSection = () => (
-  <section className="mt-2 flex h-[calc(100svh-68px)] flex-col border p-3 md:mt-4 md:h-[calc(100vh-84px)] md:p-8">
-    <div
-      className="rellax flex h-full flex-col justify-center md:w-[80%]"
-      data-rellax-speed="-2"
-    >
-      <HeroText
-        className="text-center md:text-left"
-        words="Your guide to the tastiest Kebab spots in Southampton."
-      />
-    </div>
-    <div
-      className="rellax z-10 flex h-full items-center justify-center p-4 md:justify-end"
-      data-rellax-speed="1"
-      data-rellax-zindex="1"
-    >
-      <SampleScoreCard />
-    </div>
-  </section>
-);
