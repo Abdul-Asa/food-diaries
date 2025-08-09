@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { Metadata } from "./types";
 
-function parseFrontmatter(fileContent: string) {
+export function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
   let match = frontmatterRegex.exec(fileContent);
   let frontMatterBlock = match![1];

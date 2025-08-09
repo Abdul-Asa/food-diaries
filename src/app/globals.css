@@ -42,6 +42,13 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-pale: var(--pale);
+  --color-main: var(--main);
+  --color-secondary: var(--secondary);
+  --border-default: var(--border-default);
+  --font-poppins: var(--font-poppins);
+  --font-ibm: var(--font-ibm);
+  --default-border-width: 2px;
 }
 
 :root {
@@ -61,7 +68,7 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
+  --border: oklch(0 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -77,6 +84,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --pale: oklch(0.995 0.003 83.5);
+  --main: oklch(0.612 0.234 29.2);
+  --secondary: oklch(0.323 0.191 264);
 }
 
 .dark {
@@ -111,6 +121,9 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --pale: oklch(0.995 0.003 83.5);
+  --main: oklch(0.612 0.234 29.2);
+  --secondary: oklch(0.323 0.191 264);
 }
 
 @layer base {
@@ -118,6 +131,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overscroll-none overflow-hidden;
   }
+}
+
+/* Neo-brutalist custom utilities */
+@layer utilities {
 }
