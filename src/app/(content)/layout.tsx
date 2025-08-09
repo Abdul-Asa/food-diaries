@@ -3,6 +3,11 @@ export default function ContentLayout({
 }: {
   children: React.ReactNode;
 }) {
-  //tw-typography and mdx layout
-  return <div>{children}</div>;
+  return (
+    <div className="mx-auto max-w-2xl px-6 py-12">
+      <article className="prose prose-quoteless prose-neutral lg:prose-lg">
+        {children}
+      </article>
+    </div>
+  );
 }

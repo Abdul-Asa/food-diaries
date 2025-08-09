@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { Metadata } from "./types";
+import { Metadata, ReviewMetadata } from "./types";
 
 export function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
@@ -80,5 +80,9 @@ export function formatDate(date: string, includeRelative = false) {
 }
 
 export const getReviews = () => {
-  return getMDXData(path.join(process.cwd(), "content", "reviews"));
+  return getMDXData(path.join(process.cwd(), "src/content/reviews")) as {
+    metadata: ReviewMetadata;
+    slug: string;
+    content: string;
+  }[];
 };

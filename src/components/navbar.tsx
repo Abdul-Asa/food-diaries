@@ -5,7 +5,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { title: "Blog", href: "/blog" },
+  { title: "Reviews", href: "/reviews" },
   { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
 ];

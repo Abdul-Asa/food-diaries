@@ -12,14 +12,25 @@ In a world full of overpriced, underwhelming food experiences, we're here to cut
 
 We visit every establishment personally, paying for our own meals to ensure completely unbiased reviews. No sponsorships, no paid promotions – just honest opinions from real food lovers.
 
-### Comprehensive Ratings
+### Our Scoring System
 
-Our unique scoring system evaluates:
+Below is an example of how we rate each establishment:
 
-- **Quality**: Taste, freshness, and authenticity
-- **Aesthetic**: Presentation and visual appeal
-- **Price**: Value for money
-- **Overall Experience**: Service, atmosphere, and that special something
+import { ScoreCard } from "@/components/score-card";
+
+<ScoreCard
+  score={100}
+  metrics={[
+    { label: "Coffee", value: "5/5" },
+    { label: "Aesthetic", value: "5/5" },
+    { label: "Seating", value: "5/5" },
+  ]}
+  info={[
+    { label: "Price", value: "$" },
+    { label: "Food", value: "Yes" },
+    { label: "Wi-fi", value: "Yes" },
+  ]}
+/>
 
 ### Local Focus
 
