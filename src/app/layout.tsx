@@ -35,7 +35,7 @@ export default function RootLayout({
           "bg-pale font-poppins text-black"
         )}
       >
-        <main className="flex min-h-screen flex-col p-2">
+        <main className="flex min-h-screen flex-col p-1">
           <Header />
           {children}
         </main>
