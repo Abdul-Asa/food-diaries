@@ -1,6 +1,6 @@
 "use client";
+import { motion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
-import { motion, Variants } from "motion/react";
 
 interface WordPullUpProps {
   words: string;
@@ -29,18 +29,19 @@ export function HeroText({
 }: WordPullUpProps) {
   // Process words
   const processedWords = words.split(" ").map((word, i) => {
+    const key = `word-${i}-${word}`;
     if (word === "<br/>") {
-      return <br key={i} />;
+      return <br key={key} />;
     } else if (word === "") {
-      return <span key={i}>&nbsp;</span>;
+      return <span key={key}>&nbsp;</span>;
     } else {
       return (
         <motion.span
-          key={i}
+          key={key}
           whileHover={{ color: "#e03131", y: -2 }}
           className={cn(
             word.startsWith("Southampton") && "text-main",
-            "will-change-transform transform-gpu pr-2 sm:pr-4 md:pr-6"
+            "will-change-transform transform-gpu pr-2 sm:pr-4 md:pr-6",
           )}
           variants={framerProps}
           style={{ display: "inline-block" }}
@@ -56,10 +57,7 @@ export function HeroText({
       variants={wrapperFramerProps}
       initial="hidden"
       animate="show"
-      className={cn(
-        "text-[clamp(1.85rem,6vw,10rem)] font-bold drop-shadow-sm",
-        className
-      )}
+      className={cn("text-[clamp(1.85rem,6vw,10rem)] font-bold drop-shadow-sm", className)}
     >
       {processedWords}
     </motion.h1>

@@ -1,5 +1,5 @@
-import { getReviews } from "@/lib/mdx";
 import { ReviewGrid } from "@/components/review-grid";
+import { getReviews } from "@/lib/mdx";
 
 export const metadata = {
   title: "Restaurant Reviews",
@@ -11,10 +11,7 @@ export default async function ReviewsPage() {
 
   // Sort reviews by date, newest first
   reviews.sort((a, b) => {
-    return (
-      new Date(b.metadata.publishedAt).getTime() -
-      new Date(a.metadata.publishedAt).getTime()
-    );
+    return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
   });
 
   return (

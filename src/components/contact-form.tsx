@@ -15,9 +15,7 @@ export function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -46,9 +44,7 @@ export function ContactForm() {
     return (
       <div className="mx-auto max-w-2xl border-2 border-black bg-pale p-6 shadow-[4px_4px_0px_black] md:p-8">
         <div className="text-center">
-          <h3 className="mb-4 font-ibm text-xl font-bold text-main">
-            Message Sent! 🎉
-          </h3>
+          <h3 className="mb-4 font-ibm text-xl font-bold text-main">Message Sent! 🎉</h3>
           <p className="text-gray-700">
             Thanks for reaching out! We'll get back to you within 24 hours.
           </p>
@@ -65,10 +61,7 @@ export function ContactForm() {
       <div className="grid gap-6">
         {/* Name Field */}
         <div>
-          <label
-            htmlFor="name"
-            className="mb-2 block font-ibm text-sm font-bold"
-          >
+          <label htmlFor="name" className="mb-2 block font-ibm text-sm font-bold">
             Name *
           </label>
           <input
@@ -85,10 +78,7 @@ export function ContactForm() {
 
         {/* Email Field */}
         <div>
-          <label
-            htmlFor="email"
-            className="mb-2 block font-ibm text-sm font-bold"
-          >
+          <label htmlFor="email" className="mb-2 block font-ibm text-sm font-bold">
             Email *
           </label>
           <input
@@ -105,10 +95,7 @@ export function ContactForm() {
 
         {/* Subject Field */}
         <div>
-          <label
-            htmlFor="subject"
-            className="mb-2 block font-ibm text-sm font-bold"
-          >
+          <label htmlFor="subject" className="mb-2 block font-ibm text-sm font-bold">
             Subject *
           </label>
           <select
@@ -130,10 +117,7 @@ export function ContactForm() {
 
         {/* Message Field */}
         <div>
-          <label
-            htmlFor="message"
-            className="mb-2 block font-ibm text-sm font-bold"
-          >
+          <label htmlFor="message" className="mb-2 block font-ibm text-sm font-bold">
             Message *
           </label>
           <textarea

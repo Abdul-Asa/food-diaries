@@ -1,4 +1,4 @@
-import { ReviewMetadata } from "@/lib/types";
+import type { ReviewMetadata } from "@/lib/types";
 import { ReviewCard } from "./review-card";
 
 interface ReviewGridProps {

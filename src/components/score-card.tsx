@@ -20,10 +20,7 @@ export function ScoreCard({ score, metrics, info }: ScoreCardProps) {
         </div>
         <div className="grid grid-cols-2 gap-x-12 gap-y-4">
           {metrics.map((metric) => (
-            <div
-              key={metric.label}
-              className="flex items-center justify-between gap-4"
-            >
+            <div key={metric.label} className="flex items-center justify-between gap-4">
               <span className="text-gray-600">{metric.label}</span>
               <span className="font-medium text-amber-600">{metric.value}</span>
             </div>
@@ -32,10 +29,7 @@ export function ScoreCard({ score, metrics, info }: ScoreCardProps) {
       </div>
       <div className="mt-6 grid grid-cols-3 gap-4">
         {info.map((item) => (
-          <div
-            key={item.label}
-            className="flex items-center justify-between gap-2"
-          >
+          <div key={item.label} className="flex items-center justify-between gap-2">
             <span className="text-gray-600">{item.label}</span>
             <span className="font-medium text-gray-900">{item.value}</span>
           </div>

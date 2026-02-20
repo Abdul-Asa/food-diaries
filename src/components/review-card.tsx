@@ -1,7 +1,7 @@
-import Link from "next/link";
 import Image from "next/image";
-import { ReviewMetadata } from "@/lib/types";
+import Link from "next/link";
 import { formatDate } from "@/lib/mdx";
+import type { ReviewMetadata } from "@/lib/types";
 
 interface ReviewCardProps {
   slug: string;
@@ -28,12 +28,8 @@ export function ReviewCard({ slug, metadata }: ReviewCardProps) {
         </div>
       )}
       <div className="p-4">
-        <h3 className="text-xl font-semibold text-gray-900">
-          {metadata.title}
-        </h3>
-        <p className="mt-1 text-sm text-gray-600">
-          {formatDate(metadata.publishedAt, true)}
-        </p>
+        <h3 className="text-xl font-semibold text-gray-900">{metadata.title}</h3>
+        <p className="mt-1 text-sm text-gray-600">{formatDate(metadata.publishedAt, true)}</p>
         <p className="mt-2 text-gray-700">{metadata.summary}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {metadata.info.map((item) => (

@@ -1,6 +1,6 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
             href={"/"}
             className={cn(
               "focus-visible:outline-main",
-              "flex items-center border-r px-6 py-1 transition-colors duration-200 hover:bg-main hover:text-white"
+              "flex items-center border-r px-6 py-1 transition-colors duration-200 hover:bg-main hover:text-white",
             )}
           >
             Food diaries
@@ -31,14 +31,14 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="group hidden md:flex">
-          {navLinks.map((link, index) => {
+          {navLinks.map((link) => {
             return (
               <Link
-                key={index}
+                key={link.href}
                 href={link.href}
                 className={cn(
                   "focus-visible:outline-main",
-                  "flex items-center border-l px-6 py-1 transition-colors duration-200 hover:bg-main hover:text-white"
+                  "flex items-center border-l px-6 py-1 transition-colors duration-200 hover:bg-main hover:text-white",
                 )}
               >
                 {link.title}

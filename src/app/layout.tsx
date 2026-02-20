@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, IBM_Plex_Mono, Poppins } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/navbar";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -46,7 +46,7 @@ export default function RootLayout({
           poppins.variable,
           ibmPlexMono.variable,
           "bg-pale font-poppins text-black",
-          "antialiased"
+          "antialiased",
         )}
       >
         <main className="flex min-h-screen flex-col p-2 md:p-4 md:pt-0">

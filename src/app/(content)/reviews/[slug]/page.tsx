@@ -1,6 +1,5 @@
-import { getReviews } from "@/lib/mdx";
 import { notFound } from "next/navigation";
-import { ReviewMetadata } from "@/lib/types";
+import { getReviews } from "@/lib/mdx";
 
 interface ReviewPageProps {
   params: {

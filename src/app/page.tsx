@@ -1,8 +1,8 @@
+import Link from "next/link";
+import { ReviewGrid } from "@/components/review-grid";
 import { SampleScoreCard } from "@/components/score-cards";
 import { HeroText } from "@/components/text-animations";
-import { ReviewGrid } from "@/components/review-grid";
 import { getReviews } from "@/lib/mdx";
-import Link from "next/link";
 
 export default async function Home() {
   const reviews = getReviews();
@@ -11,8 +11,7 @@ export default async function Home() {
   const latestReviews = reviews
     .sort(
       (a, b) =>
-        new Date(b.metadata.publishedAt).getTime() -
-        new Date(a.metadata.publishedAt).getTime()
+        new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime(),
     )
     .slice(0, 3);
 
