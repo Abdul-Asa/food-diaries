@@ -22,7 +22,7 @@ function HamburgerButton({
     <button
       aria-expanded={isOpen}
       aria-label={isOpen ? "Close menu" : "Open menu"}
-      className="relative z-50 flex aspect-square h-full cursor-pointer items-center justify-center border-border border-l-2 bg-card px-3 md:hidden"
+      className="relative z-50 flex aspect-square h-full cursor-pointer items-center justify-center border-border border-x-2 px-3 md:hidden"
       onClick={toggle}
       type="button"
     >
@@ -33,9 +33,8 @@ function HamburgerButton({
               ? {
                   rotate: 45,
                   y: 8,
-                  backgroundColor: "var(--primary-foreground)",
                 }
-              : { rotate: 0, y: 0, backgroundColor: "var(--foreground)" }
+              : { rotate: 0, y: 0 }
           }
           className="block h-[3px] w-full origin-center rounded-none bg-foreground"
           transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
@@ -53,9 +52,8 @@ function HamburgerButton({
               ? {
                   rotate: -45,
                   y: -8,
-                  backgroundColor: "var(--primary-foreground)",
                 }
-              : { rotate: 0, y: 0, backgroundColor: "var(--foreground)" }
+              : { rotate: 0, y: 0 }
           }
           className="block h-[3px] w-full origin-center rounded-none bg-foreground"
           transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
@@ -75,14 +73,6 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
       transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
     >
       {/* Decorative grid lines */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
-        <div className="absolute top-1/4 right-0 left-0 h-[2px] bg-primary-foreground" />
-        <div className="absolute top-2/4 right-0 left-0 h-[2px] bg-primary-foreground" />
-        <div className="absolute top-3/4 right-0 left-0 h-[2px] bg-primary-foreground" />
-        <div className="absolute top-0 bottom-0 left-1/4 w-[2px] bg-primary-foreground" />
-        <div className="absolute top-0 bottom-0 left-2/4 w-[2px] bg-primary-foreground" />
-        <div className="absolute top-0 bottom-0 left-3/4 w-[2px] bg-primary-foreground" />
-      </div>
 
       {/* Menu content */}
       <div className="flex flex-1 flex-col justify-center px-8">
@@ -161,7 +151,7 @@ export function Header() {
 
   return (
     <>
-      <nav className="relative z-50 border-border border-y-2">
+      <nav className="relative z-50 border-border border-y-2 bg-background">
         <div className="mx-auto flex h-12 items-stretch justify-between">
           <Link
             className="flex h-full items-stretch no-underline outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
