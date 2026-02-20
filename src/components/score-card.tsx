@@ -1,58 +1,53 @@
-import { computeOverall, getValueLabel } from "@/lib/kebab-spots";
-import type { KebabSpot, PriceTier } from "@/lib/types";
-import { cn } from "@/lib/utils";
+"use client";
 
-interface ScoreCardProps {
-  className?: string;
-  spot: KebabSpot;
-}
-
-function PriceDisplay({ price }: { price: PriceTier }) {
-  return <span className="font-mono text-foreground">{price}</span>;
-}
-
-export function ScoreCard({ spot, className }: ScoreCardProps) {
-  const overall = computeOverall(spot);
-  const value = getValueLabel(spot);
-
+export function ScoreCard() {
   return (
-    <div
-      className={cn("relative w-full min-w-[140px] max-w-[200px]", className)}
-    >
-      {/* Red offset shadow block (6–10px translate) */}
-      <div
-        aria-hidden
-        className="absolute inset-0 translate-x-2 translate-y-2 border-2 border-foreground bg-primary"
-      />
-      <div
-        className={cn(
-          "relative border-2 border-foreground bg-background p-4",
-          "flex flex-col gap-2"
-        )}
-      >
-        <div className="flex items-baseline justify-between gap-2">
-          <span className="font-mono font-semibold text-foreground/80 text-xs uppercase tracking-wide">
-            Overall
-          </span>
-          <span className="font-bold font-head text-3xl text-foreground tabular-nums">
-            {overall}
-          </span>
+    <div className="flex min-h-60 w-4/5 flex-col border bg-pale p-2 shadow-[4px_4px_0px_red] sm:w-[65%] sm:p-6 md:flex-row lg:w-1/2 lg:shadow-[8px_8px_0px_red] xl:border-[3px] xl:p-12">
+      <div className="flex flex-col justify-center gap-1 text-center md:gap-2 md:p-4">
+        <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
+          Overall
+        </h2>
+        <p className="font-bold text-[clamp(1.85rem,5vw,10rem)] text-main">
+          100
+        </p>
+      </div>
+      <div className="m-3 border-main border-t border-l xl:mx-8" />
+      <div className="flex w-full flex-col items-center gap-4 text-center sm:flex-row">
+        <div className="flex w-full flex-col gap-4">
+          <div className="flex w-full flex-col items-center gap-1 md:gap-2">
+            <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
+              Quality
+            </h2>
+            <p className="font-bold text-[clamp(1rem,1.5vw,4rem)] text-main">
+              5/5
+            </p>
+          </div>
+          <div className="flex w-full flex-col items-center gap-1 md:gap-2">
+            <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
+              Aesthetic
+            </h2>
+            <p className="font-bold text-[clamp(1rem,1.5vw,4rem)] text-main">
+              5/5
+            </p>
+          </div>
         </div>
-        <div className="flex justify-between font-mono text-foreground text-sm">
-          <span className="text-foreground/80">Quality</span>
-          <span>{spot.quality}</span>
-        </div>
-        <div className="flex justify-between font-mono text-foreground text-sm">
-          <span className="text-foreground/80">Aesthetic</span>
-          <span>{spot.aesthetic}</span>
-        </div>
-        <div className="flex justify-between font-mono text-foreground text-sm">
-          <span className="text-foreground/80">Price</span>
-          <PriceDisplay price={spot.price} />
-        </div>
-        <div className="mt-1 flex justify-between font-mono font-semibold text-foreground text-sm">
-          <span className="text-foreground/80">Value</span>
-          <span>{value}</span>
+        <div className="flex w-full flex-col gap-4">
+          <div className="flex w-full flex-col items-center gap-1 md:gap-2">
+            <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
+              Price
+            </h2>
+            <p className="font-bold text-[clamp(1rem,1.5vw,4rem)] text-main">
+              £
+            </p>
+          </div>
+          <div className="flex w-full flex-col items-center gap-1 md:gap-2">
+            <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
+              Value
+            </h2>
+            <p className="font-semibold text-[clamp(1rem,1.5vw,4rem)] text-main">
+              Amazing Deal
+            </p>
+          </div>
         </div>
       </div>
     </div>

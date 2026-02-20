@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Poppins } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/header";
+import { cn } from "@/lib/utils";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: "500",
+  variable: "--font-poppins",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
+  weight: "400",
+  variable: "--font-ibm",
 });
 
 export const metadata: Metadata = {
-  title: "Food diaries",
-  description: "Your guide to the tastiest kebab spots in Southampton.",
+  title: "Saints Food Diary",
+  description: "A food diary for saints",
 };
 
 export default function RootLayout({
@@ -26,9 +29,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+        className={cn(
+          poppins.variable,
+          ibmPlexMono.variable,
+          "bg-pale font-poppins text-black"
+        )}
       >
-        {children}
+        <main className="flex min-h-screen flex-col p-2 md:p-4 md:pt-0">
+          <Header />
+          {children}
+        </main>
       </body>
     </html>
   );

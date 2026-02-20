@@ -91,6 +91,14 @@
   --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
   --sidebar-border: oklch(0.923 0.003 48.717);
   --sidebar-ring: oklch(0.709 0.01 56.259);
+  --content-max-width: 1200px;
+  --border-width: 1px;
+  --border-width-thick: 4px;
+  --spacing-page-x: 1rem;
+  --spacing-page-y: 1.5rem;
+  --spacing-section: 2.5rem;
+  --rating-card-min-width: 140px;
+  --rating-card-max-width: 200px;
 }
 
 .dark {

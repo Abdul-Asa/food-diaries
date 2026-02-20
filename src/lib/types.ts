@@ -8,11 +8,16 @@ export type PriceTier = "£" | "££" | "£££";
 
 export type ValueLabel = "Amazing Deal" | "Good" | "Okay" | "Not worth";
 
-export interface KebabSpot {
-  address: string;
+export interface ScoreCard {
   aesthetic: number;
-  name: string;
+  overall: number;
   price: PriceTier;
   quality: number;
-  verdict: string;
+  value: ValueLabel;
+}
+
+export interface KebabSpot {
+  address: string;
+  name: string;
+  score: ScoreCard;
 }
