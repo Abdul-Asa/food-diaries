@@ -1,10 +1,5 @@
-export default function Home() {
-  return (
-    <main className="flex flex-col">
-      {/* Hero section */}
-      <HeroSection />
-    </main>
-  );
-}
+import { HeroPage } from "@/components/hero-content";
 
-const HeroSection = () => <section className="">{/* <ScoreCard /> */}</section>;
+export default function Home() {
+  return <HeroPage />;
+}

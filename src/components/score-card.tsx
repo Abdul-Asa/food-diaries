@@ -1,54 +1,54 @@
 "use client";
 
-export function ScoreCard() {
+import type { ScoreCard as ScoreCardType } from "@/lib/types";
+import { cn } from "@/lib/utils";
+
+interface ScoreCardProps {
+  className?: string;
+  score: ScoreCardType;
+}
+
+function StatItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex min-h-60 w-4/5 flex-col border bg-pale p-2 shadow-[4px_4px_0px_red] sm:w-[65%] sm:p-6 md:flex-row lg:w-1/2 lg:shadow-[8px_8px_0px_red] xl:border-[3px] xl:p-12">
-      <div className="flex flex-col justify-center gap-1 text-center md:gap-2 md:p-4">
-        <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
+    <div className="flex flex-col items-center gap-1">
+      <span className="font-ibm font-semibold text-[clamp(0.8rem,1.2vw,1.05rem)]">
+        {label}
+      </span>
+      <span className="font-bold text-[clamp(0.9rem,1.4vw,1.25rem)] text-primary">
+        {value}
+      </span>
+    </div>
+  );
+}
+
+export function ScoreCard({ score, className }: ScoreCardProps) {
+  return (
+    <div
+      className={cn(
+        "flex select-none border-[3px] border-border bg-background",
+        className
+      )}
+      style={{ boxShadow: "8px 8px 0 0 var(--primary)" }}
+    >
+      {/* Overall score */}
+      <div className="flex flex-col items-center justify-center gap-1 p-5 sm:gap-2 sm:p-8 md:p-10">
+        <span className="font-ibm font-semibold text-[clamp(0.85rem,1.3vw,1.1rem)]">
           Overall
-        </h2>
-        <p className="font-bold text-[clamp(1.85rem,5vw,10rem)] text-main">
-          100
-        </p>
+        </span>
+        <span className="font-bold text-[clamp(2.8rem,6vw,5.5rem)] text-primary italic leading-none">
+          {score.overall}
+        </span>
       </div>
-      <div className="m-3 border-main border-t border-l xl:mx-8" />
-      <div className="flex w-full flex-col items-center gap-4 text-center sm:flex-row">
-        <div className="flex w-full flex-col gap-4">
-          <div className="flex w-full flex-col items-center gap-1 md:gap-2">
-            <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
-              Quality
-            </h2>
-            <p className="font-bold text-[clamp(1rem,1.5vw,4rem)] text-main">
-              5/5
-            </p>
-          </div>
-          <div className="flex w-full flex-col items-center gap-1 md:gap-2">
-            <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
-              Aesthetic
-            </h2>
-            <p className="font-bold text-[clamp(1rem,1.5vw,4rem)] text-main">
-              5/5
-            </p>
-          </div>
-        </div>
-        <div className="flex w-full flex-col gap-4">
-          <div className="flex w-full flex-col items-center gap-1 md:gap-2">
-            <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
-              Price
-            </h2>
-            <p className="font-bold text-[clamp(1rem,1.5vw,4rem)] text-main">
-              £
-            </p>
-          </div>
-          <div className="flex w-full flex-col items-center gap-1 md:gap-2">
-            <h2 className="font-ibm font-semibold text-[clamp(1rem,1.5vw,4rem)]">
-              Value
-            </h2>
-            <p className="font-semibold text-[clamp(1rem,1.5vw,4rem)] text-main">
-              Amazing Deal
-            </p>
-          </div>
-        </div>
+
+      {/* Divider */}
+      <div className="my-5 w-px bg-primary/30 sm:my-6" />
+
+      {/* Stats grid */}
+      <div className="grid flex-1 grid-cols-2 content-center gap-x-4 gap-y-3 p-5 sm:gap-x-10 sm:gap-y-5 sm:p-8 md:p-10">
+        <StatItem label="Quality" value={`${score.quality}/5`} />
+        <StatItem label="Price" value={score.price} />
+        <StatItem label="Aesthetic" value={`${score.aesthetic}/5`} />
+        <StatItem label="Value" value={score.value} />
       </div>
     </div>
   );
