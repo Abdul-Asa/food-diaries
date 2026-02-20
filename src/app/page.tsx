@@ -1,5 +1,3 @@
-import { ScoreCard } from "@/components/score-card";
-
 export default function Home() {
   return (
     <main className="flex flex-col">
@@ -9,8 +7,4 @@ export default function Home() {
   );
 }
 
-const HeroSection = () => (
-  <section className="">
-    <ScoreCard />
-  </section>
-);
+const HeroSection = () => <section className="">{/* <ScoreCard /> */}</section>;
