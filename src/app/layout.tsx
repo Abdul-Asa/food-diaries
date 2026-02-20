@@ -28,14 +28,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          poppins.variable,
-          ibmPlexMono.variable,
-          "bg-pale font-poppins text-black"
-        )}
-      >
-        <main className="flex min-h-screen flex-col p-1">
+      <body className={cn(poppins.variable, ibmPlexMono.variable)}>
+        <main className="flex min-h-screen flex-col p-4">
           <Header />
           {children}
         </main>
