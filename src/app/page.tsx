@@ -1,64 +1,73 @@
-import Image from "next/image";
+import { Hero } from "@/components/hero";
+import { KebabSpotCard } from "@/components/kebab-spot-card";
+import { Nav } from "@/components/nav";
+import { RatingExplanation } from "@/components/rating-explanation";
+import { KEBAB_SPOTS } from "@/lib/kebab-spots";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
-        <Image
-          alt="Next.js logo"
-          className="dark:invert"
-          height={20}
-          priority
-          src="/next.svg"
-          width={100}
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs font-semibold text-3xl text-black leading-10 tracking-tight dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg text-zinc-600 leading-8 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 font-medium text-base sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] md:w-[158px] dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            rel="noopener noreferrer"
-            target="_blank"
+    <div className="min-h-screen bg-background">
+      <Nav />
+      <main>
+        <Hero />
+        <RatingExplanation />
+        <section
+          aria-labelledby="guide-heading"
+          className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 lg:px-8"
+          id="guide"
+        >
+          <h2
+            className="font-bold font-head text-2xl text-foreground leading-tight tracking-tight sm:text-3xl"
+            id="guide-heading"
           >
-            <Image
-              alt="Vercel logomark"
-              className="dark:invert"
-              height={16}
-              src="/vercel.svg"
-              width={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-black/[.08] border-solid px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
+            The guide
+          </h2>
+          <ul className="mt-8 flex list-none flex-col gap-6 p-0">
+            {KEBAB_SPOTS.map((spot) => (
+              <li key={spot.name}>
+                <KebabSpotCard
+                  slug={spot.name.toLowerCase().replace(/\s+/g, "-")}
+                  spot={spot}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+        <footer className="mx-auto max-w-[1200px] border-foreground border-t-2 px-4 py-10 sm:px-6 lg:px-8">
+          <div className="grid gap-8 sm:grid-cols-3">
+            <section aria-labelledby="blog-heading" id="blog">
+              <h2
+                className="font-bold font-head text-foreground text-lg"
+                id="blog-heading"
+              >
+                Blog
+              </h2>
+              <p className="mt-2 text-foreground/80 text-sm">
+                More guides and reviews coming soon.
+              </p>
+            </section>
+            <section aria-labelledby="about-heading" id="about">
+              <h2
+                className="font-bold font-head text-foreground text-lg"
+                id="about-heading"
+              >
+                About
+              </h2>
+              <p className="mt-2 text-foreground/80 text-sm">
+                We rate kebab spots in Southampton.
+              </p>
+            </section>
+            <section aria-labelledby="contact-heading" id="contact">
+              <h2
+                className="font-bold font-head text-foreground text-lg"
+                id="contact-heading"
+              >
+                Contact
+              </h2>
+              <p className="mt-2 text-foreground/80 text-sm">Get in touch.</p>
+            </section>
+          </div>
+        </footer>
       </main>
     </div>
   );
