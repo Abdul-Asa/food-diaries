@@ -3,6 +3,7 @@
 import { motion, useInView } from "motion/react";
 import Link from "next/link";
 import { useRef } from "react";
+import type { Review } from "@/lib/reviews";
 
 const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -26,33 +27,6 @@ const RATING_CRITERIA = [
     title: "Value",
     description:
       "The final verdict: Amazing Deal, Good, Okay, or Not worth. No fluff. Just whether we’d go back.",
-  },
-] as const;
-
-const SPOT_CARDS = [
-  {
-    name: "Ali's Kebab House",
-    score: 94,
-    slug: "alis-kebab-house",
-    area: "Portswood",
-  },
-  {
-    name: "The Wrap Shop",
-    score: 88,
-    slug: "the-wrap-shop",
-    area: "Highfield",
-  },
-  {
-    name: "Noor's Kitchen",
-    score: 91,
-    slug: "noors-kitchen",
-    area: "Bevois Valley",
-  },
-  {
-    name: "Beirut Nights",
-    score: 86,
-    slug: "beirut-nights",
-    area: "City Centre",
   },
 ] as const;
 
@@ -106,7 +80,11 @@ export function HowWeRate() {
   );
 }
 
-export function SpotGrid() {
+interface SpotGridProps {
+  recentReviews: Review[];
+}
+
+export function SpotGrid({ recentReviews }: SpotGridProps) {
   const { ref, inView } = useReveal();
 
   return (
@@ -135,10 +113,10 @@ export function SpotGrid() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {SPOT_CARDS.map((spot, i) => (
+        {recentReviews.map((review, i) => (
           <motion.div
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            key={spot.slug}
+            key={review.slug}
             transition={{
               duration: 0.5,
               delay: 0.06 * i,
@@ -147,19 +125,19 @@ export function SpotGrid() {
           >
             <Link
               className="group block border-2 border-border bg-card p-5 transition-all duration-200 hover:border-primary/30 hover:shadow-md"
-              href={`/reviews/${spot.slug}`}
+              href={`/reviews/${review.slug}`}
               style={{ boxShadow: "4px 4px 0 0 var(--border)" }}
             >
               <div className="flex items-start justify-between gap-2">
                 <h3 className="font-bold text-foreground transition-colors group-hover:text-primary">
-                  {spot.name}
+                  {review.frontmatter.name}
                 </h3>
                 <span className="shrink-0 font-bold font-poppins text-primary text-xl">
-                  {spot.score}
+                  {review.frontmatter.overall}
                 </span>
               </div>
               <p className="mt-1 font-ibm text-muted-foreground text-xs uppercase tracking-wider">
-                {spot.area}
+                {review.frontmatter.area}
               </p>
             </Link>
           </motion.div>
@@ -215,11 +193,15 @@ export function CtaSection() {
   );
 }
 
-export function LandingSections() {
+interface LandingSectionsProps {
+  recentReviews: Review[];
+}
+
+export function LandingSections({ recentReviews }: LandingSectionsProps) {
   return (
     <>
       <HowWeRate />
-      <SpotGrid />
+      <SpotGrid recentReviews={recentReviews} />
       <CtaSection />
     </>
   );

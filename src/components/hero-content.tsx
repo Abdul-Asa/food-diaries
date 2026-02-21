@@ -4,18 +4,10 @@ import { motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
 import { Marquee } from "@/components/marquee";
 import { ScoreCard } from "@/components/score-card";
-import type { ScoreCard as ScoreCardType } from "@/lib/types";
+import { getScoreFromReview, type Review } from "@/lib/reviews";
 
 const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const FEATURED_SCORE: ScoreCardType = {
-  overall: 100,
-  quality: 5,
-  aesthetic: 5,
-  price: "£",
-  value: "Good",
-};
 
 const KEBAB_SPOTS = [
   "Sultan's Delight",
@@ -32,9 +24,14 @@ const KEBAB_SPOTS = [
   "Portswood Grill",
 ];
 
-function HeroSection() {
+interface HeroSectionProps {
+  featuredReview: Review | undefined;
+}
+
+function HeroSection({ featuredReview }: HeroSectionProps) {
   const { scrollY } = useScroll();
   const cardY = useTransform(scrollY, [0, 600], [0, -120]);
+  const score = featuredReview ? getScoreFromReview(featuredReview) : undefined;
 
   return (
     <section className="relative flex min-h-[calc(100vh-6rem)] flex-col justify-between gap-10 py-12 md:flex-row md:items-center md:gap-12 lg:gap-16">
@@ -133,18 +130,22 @@ function HeroSection() {
         whileDrag={{ scale: 1.04 }}
       >
         <div className="flex max-w-md -rotate-2 flex-col gap-3">
-          <ScoreCard score={FEATURED_SCORE} />
-          <div className="hidden items-center justify-between px-1 md:flex">
-            <div>
-              <h3 className="font-bold text-sm">Sultan&apos;s Delight</h3>
-              <p className="font-ibm text-muted-foreground text-xs">
-                Portswood, SO17
-              </p>
+          {score && <ScoreCard score={score} />}
+          {featuredReview && (
+            <div className="hidden items-center justify-between px-1 md:flex">
+              <div>
+                <h3 className="font-bold text-sm">
+                  {featuredReview.frontmatter.name}
+                </h3>
+                <p className="font-ibm text-muted-foreground text-xs">
+                  {featuredReview.frontmatter.area}
+                </p>
+              </div>
+              <span className="font-ibm text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+                Latest
+              </span>
             </div>
-            <span className="font-ibm text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
-              Latest
-            </span>
-          </div>
+          )}
         </div>
       </motion.div>
 
@@ -206,7 +207,18 @@ function MarqueeStrip() {
   );
 }
 
-function FeaturedReview() {
+interface FeaturedReviewProps {
+  featuredReview: Review | undefined;
+}
+
+function FeaturedReview({ featuredReview }: FeaturedReviewProps) {
+  if (!featuredReview) {
+    return null;
+  }
+
+  const score = getScoreFromReview(featuredReview);
+  const { frontmatter } = featuredReview;
+
   return (
     <motion.section
       animate={{ opacity: 1, y: 0 }}
@@ -222,25 +234,20 @@ function FeaturedReview() {
       </div>
 
       <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
-        {/* Score Card */}
-        <ScoreCard className="shrink-0" score={FEATURED_SCORE} />
-
-        {/* Review content */}
+        <ScoreCard className="shrink-0" score={score} />
         <div className="flex flex-col gap-4">
           <h2 className="font-bold font-poppins text-3xl tracking-tight md:text-4xl">
-            Sultan&apos;s Delight
+            {frontmatter.name}
           </h2>
           <p className="font-ibm text-muted-foreground text-sm">
-            Portswood Road, Southampton &middot; Reviewed Jan 2026
+            {frontmatter.address} &middot; Reviewed {frontmatter.reviewedDate}
           </p>
           <p className="max-w-lg text-foreground/80 leading-relaxed">
-            A hidden gem tucked away on Portswood Road. The lamb doner is carved
-            fresh off the spit, the salad is crisp, and the garlic sauce hits
-            different at 2am. This is the one.
+            {frontmatter.excerpt}
           </p>
           <Link
             className="group mt-2 flex items-center gap-2 font-bold text-primary transition-colors hover:text-primary-hover"
-            href="/reviews/sultans-delight"
+            href={`/reviews/${featuredReview.slug}`}
           >
             Read Full Review
             <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
@@ -287,15 +294,19 @@ function StatsBar() {
   );
 }
 
-export function HeroPage() {
+interface HeroPageProps {
+  featuredReview: Review | undefined;
+}
+
+export function HeroPage({ featuredReview }: HeroPageProps) {
   return (
     <div className="flex flex-col">
       <div className="mx-auto w-full max-w-6xl">
-        <HeroSection />
+        <HeroSection featuredReview={featuredReview} />
       </div>
       <MarqueeStrip />
       <div className="mx-auto w-full max-w-6xl">
-        <FeaturedReview />
+        <FeaturedReview featuredReview={featuredReview} />
         <StatsBar />
       </div>
     </div>

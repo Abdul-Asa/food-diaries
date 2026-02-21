@@ -21,3 +21,18 @@ export interface KebabSpot {
   name: string;
   score: ScoreCard;
 }
+
+export interface ReviewFrontmatter {
+  address: string;
+  aesthetic: number;
+  area: string;
+  excerpt: string;
+  featured?: boolean;
+  name: string;
+  overall: number;
+  price: PriceTier;
+  quality: number;
+  reviewedDate: string;
+  slug: string;
+  value: ValueLabel;
+}
