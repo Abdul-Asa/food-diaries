@@ -4,12 +4,12 @@ import { motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
 import { Marquee } from "@/components/marquee";
 import { ScoreCard } from "@/components/score-card";
-import { getScoreFromReview, type Review } from "@/lib/reviews";
+import type { ScoreCard as ScoreCardType } from "@/lib/types";
 
 const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-const KEBAB_SPOTS = [
+const MARQUEE_KEBAB_SPOTS = [
   "Sultan's Delight",
   "Ali's Kebab House",
   "The Wrap Shop",
@@ -24,14 +24,17 @@ const KEBAB_SPOTS = [
   "Portswood Grill",
 ];
 
-interface HeroSectionProps {
-  featuredReview: Review | undefined;
-}
+const HERO_SCORE_CARD = {
+  aesthetic: 5,
+  overall: 5,
+  price: "££",
+  quality: 4,
+  value: "Amazing Deal",
+} satisfies ScoreCardType;
 
-function HeroSection({ featuredReview }: HeroSectionProps) {
+function HeroSection() {
   const { scrollY } = useScroll();
   const cardY = useTransform(scrollY, [0, 600], [0, -120]);
-  const score = featuredReview ? getScoreFromReview(featuredReview) : undefined;
 
   return (
     <section className="relative flex min-h-[calc(100vh-6rem)] flex-col justify-between gap-10 py-12 md:flex-row md:items-center md:gap-12 lg:gap-16">
@@ -130,8 +133,8 @@ function HeroSection({ featuredReview }: HeroSectionProps) {
         whileDrag={{ scale: 1.04 }}
       >
         <div className="flex max-w-md -rotate-2 flex-col gap-3">
-          {score && <ScoreCard score={score} />}
-          {featuredReview && (
+          <ScoreCard score={HERO_SCORE_CARD} />
+          {/* {featuredReview && (
             <div className="hidden items-center justify-between px-1 md:flex">
               <div>
                 <h3 className="font-bold text-sm">
@@ -145,7 +148,7 @@ function HeroSection({ featuredReview }: HeroSectionProps) {
                 Latest
               </span>
             </div>
-          )}
+          )} */}
         </div>
       </motion.div>
 
@@ -179,7 +182,7 @@ function MarqueeStrip() {
   return (
     <div className="-mx-4 border-border border-y-[3px] bg-foreground">
       <Marquee duration={25} pauseOnHover>
-        {KEBAB_SPOTS.map((spot) => (
+        {MARQUEE_KEBAB_SPOTS.map((spot) => (
           <span className="flex items-center gap-6 px-6 py-3" key={spot}>
             <span className="font-ibm text-background text-xs uppercase tracking-[0.2em]">
               {spot}
@@ -190,7 +193,7 @@ function MarqueeStrip() {
       </Marquee>
       <div className="border-background/10 border-t">
         <Marquee duration={35} pauseOnHover reverse>
-          {KEBAB_SPOTS.map((spot) => (
+          {MARQUEE_KEBAB_SPOTS.map((spot) => (
             <span
               className="flex items-center gap-6 px-6 py-3"
               key={`${spot}-rev`}
@@ -207,108 +210,13 @@ function MarqueeStrip() {
   );
 }
 
-interface FeaturedReviewProps {
-  featuredReview: Review | undefined;
-}
-
-function FeaturedReview({ featuredReview }: FeaturedReviewProps) {
-  if (!featuredReview) {
-    return null;
-  }
-
-  const score = getScoreFromReview(featuredReview);
-  const { frontmatter } = featuredReview;
-
-  return (
-    <motion.section
-      animate={{ opacity: 1, y: 0 }}
-      className="py-16 md:py-24"
-      initial={{ opacity: 0, y: 40 }}
-      transition={{ duration: 1, delay: 1.2, ease: EASE_SMOOTH }}
-    >
-      <div className="mb-8 flex items-center gap-4">
-        <span className="font-ibm text-[10px] text-muted-foreground uppercase tracking-[0.25em]">
-          Featured Review
-        </span>
-        <div className="h-px flex-1 bg-border" />
-      </div>
-
-      <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
-        <ScoreCard className="shrink-0" score={score} />
-        <div className="flex flex-col gap-4">
-          <h2 className="font-bold font-poppins text-3xl tracking-tight md:text-4xl">
-            {frontmatter.name}
-          </h2>
-          <p className="font-ibm text-muted-foreground text-sm">
-            {frontmatter.address} &middot; Reviewed {frontmatter.reviewedDate}
-          </p>
-          <p className="max-w-lg text-foreground/80 leading-relaxed">
-            {frontmatter.excerpt}
-          </p>
-          <Link
-            className="group mt-2 flex items-center gap-2 font-bold text-primary transition-colors hover:text-primary-hover"
-            href={`/reviews/${featuredReview.slug}`}
-          >
-            Read Full Review
-            <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
-              &rarr;
-            </span>
-          </Link>
-        </div>
-      </div>
-    </motion.section>
-  );
-}
-
-function StatsBar() {
-  return (
-    <motion.section
-      animate={{ opacity: 1 }}
-      className="border-border border-t-2 py-12"
-      initial={{ opacity: 0 }}
-      transition={{ duration: 0.8, delay: 1.5 }}
-    >
-      <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-        <div className="flex gap-10 md:gap-14">
-          {[
-            { number: "12", label: "Spots Reviewed" },
-            { number: "4.2", label: "Avg Rating" },
-            { number: "SO14\u201317", label: "Postcodes" },
-          ].map(({ number, label }) => (
-            <div key={label}>
-              <span className="font-bold font-poppins text-2xl md:text-3xl">
-                {number}
-              </span>
-              <p className="mt-1 font-ibm text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
-                {label}
-              </p>
-            </div>
-          ))}
-        </div>
-        <p className="max-w-xs font-ibm text-muted-foreground text-sm leading-relaxed">
-          Every kebab spot in Southampton, reviewed honestly. No sponsorships.
-          No&nbsp;agenda. Just&nbsp;kebabs.
-        </p>
-      </div>
-    </motion.section>
-  );
-}
-
-interface HeroPageProps {
-  featuredReview: Review | undefined;
-}
-
-export function HeroPage({ featuredReview }: HeroPageProps) {
+export function HeroPage() {
   return (
     <div className="flex flex-col">
       <div className="mx-auto w-full max-w-6xl">
-        <HeroSection featuredReview={featuredReview} />
+        <HeroSection />
       </div>
       <MarqueeStrip />
-      <div className="mx-auto w-full max-w-6xl">
-        <FeaturedReview featuredReview={featuredReview} />
-        <StatsBar />
-      </div>
     </div>
   );
 }

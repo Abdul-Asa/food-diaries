@@ -3,7 +3,8 @@
 import { motion, useInView } from "motion/react";
 import Link from "next/link";
 import { useRef } from "react";
-import type { Review } from "@/lib/reviews";
+import { ReviewList } from "@/components/review-list";
+import type { NormalizedReviewDisplay } from "@/lib/types";
 
 const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -80,73 +81,6 @@ export function HowWeRate() {
   );
 }
 
-interface SpotGridProps {
-  recentReviews: Review[];
-}
-
-export function SpotGrid({ recentReviews }: SpotGridProps) {
-  const { ref, inView } = useReveal();
-
-  return (
-    <motion.section
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
-      className="border-border border-t-2 py-16 md:py-24"
-      initial={false}
-      ref={ref}
-      transition={{ duration: 0.7, ease: EASE_SMOOTH }}
-    >
-      <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <span className="font-ibm text-[10px] text-muted-foreground uppercase tracking-[0.25em]">
-            Recent reviews
-          </span>
-          <h2 className="mt-2 font-bold font-poppins text-2xl tracking-tight md:text-3xl">
-            More spots to try
-          </h2>
-        </div>
-        <Link
-          className="font-bold text-primary underline decoration-2 underline-offset-4 transition-colors hover:text-primary-hover"
-          href="/reviews"
-        >
-          View all reviews &rarr;
-        </Link>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {recentReviews.map((review, i) => (
-          <motion.div
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            key={review.slug}
-            transition={{
-              duration: 0.5,
-              delay: 0.06 * i,
-              ease: EASE_SMOOTH,
-            }}
-          >
-            <Link
-              className="group block border-2 border-border bg-card p-5 transition-all duration-200 hover:border-primary/30 hover:shadow-md"
-              href={`/reviews/${review.slug}`}
-              style={{ boxShadow: "4px 4px 0 0 var(--border)" }}
-            >
-              <div className="flex items-start justify-between gap-2">
-                <h3 className="font-bold text-foreground transition-colors group-hover:text-primary">
-                  {review.frontmatter.name}
-                </h3>
-                <span className="shrink-0 font-bold font-poppins text-primary text-xl">
-                  {review.frontmatter.overall}
-                </span>
-              </div>
-              <p className="mt-1 font-ibm text-muted-foreground text-xs uppercase tracking-wider">
-                {review.frontmatter.area}
-              </p>
-            </Link>
-          </motion.div>
-        ))}
-      </div>
-    </motion.section>
-  );
-}
-
 export function CtaSection() {
   const { ref, inView } = useReveal();
 
@@ -193,16 +127,52 @@ export function CtaSection() {
   );
 }
 
-interface LandingSectionsProps {
-  recentReviews: Review[];
+interface RecentReviewItem {
+  display: NormalizedReviewDisplay;
+  slug: string;
 }
 
-export function LandingSections({ recentReviews }: LandingSectionsProps) {
+interface LandingSectionsProps {
+  recentReviewItems?: RecentReviewItem[];
+}
+
+export function LandingSections({
+  recentReviewItems = [],
+}: LandingSectionsProps) {
   return (
     <>
       <HowWeRate />
-      <SpotGrid recentReviews={recentReviews} />
+      {recentReviewItems.length > 0 && (
+        <RecentReviewsSection items={recentReviewItems} />
+      )}
       <CtaSection />
     </>
+  );
+}
+
+function RecentReviewsSection({ items }: { items: RecentReviewItem[] }) {
+  const { ref, inView } = useReveal();
+
+  return (
+    <motion.section
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
+      className="border-border border-t-2 py-16 md:py-24"
+      initial={false}
+      ref={ref}
+      transition={{ duration: 0.7, ease: EASE_SMOOTH }}
+    >
+      <div className="mb-8 flex items-center justify-between gap-4">
+        <span className="font-ibm text-[10px] text-muted-foreground uppercase tracking-[0.25em]">
+          Recent reviews
+        </span>
+        <Link
+          className="font-ibm font-medium text-primary text-sm underline decoration-primary/50 hover:decoration-primary"
+          href="/reviews"
+        >
+          View all
+        </Link>
+      </div>
+      <ReviewList compact items={items} />
+    </motion.section>
   );
 }

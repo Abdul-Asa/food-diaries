@@ -1,16 +1,18 @@
 import { HeroPage } from "@/components/hero-content";
 import { LandingSections } from "@/components/landing-sections";
-import { getFeaturedReview, getRecentReviews } from "@/lib/reviews";
+import { getRecentReviews, normalizeReviewDisplay } from "@/lib/reviews";
 
 export default function Home() {
-  const featuredReview = getFeaturedReview();
-  const recentReviews = getRecentReviews(4);
+  const recentReviews = getRecentReviews(4).map((review) => ({
+    slug: review.slug,
+    display: normalizeReviewDisplay(review),
+  }));
 
   return (
     <>
-      <HeroPage featuredReview={featuredReview} />
+      <HeroPage />
       <div className="mx-auto w-full max-w-6xl">
-        <LandingSections recentReviews={recentReviews} />
+        <LandingSections recentReviewItems={recentReviews} />
       </div>
     </>
   );
