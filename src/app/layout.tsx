@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Poppins } from "next/font/google";
 import "./globals.css";
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         <main className="flex min-h-screen flex-col p-4">
           <Header />
           {children}
+          <Footer />
         </main>
       </body>
     </html>

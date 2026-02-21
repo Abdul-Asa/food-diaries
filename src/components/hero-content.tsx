@@ -223,7 +223,7 @@ function FeaturedReview() {
 
       <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
         {/* Score Card */}
-        <ScoreCard className="shrink-0 md:max-w-sm" score={FEATURED_SCORE} />
+        <ScoreCard className="shrink-0" score={FEATURED_SCORE} />
 
         {/* Review content */}
         <div className="flex flex-col gap-4">
