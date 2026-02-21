@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Checkbox } from "@/components/retroui/checkbox";
+import { Select } from "@/components/retroui/select";
 import { ReviewCard } from "@/components/review-card";
 import type { NormalizedReviewDisplay } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -80,30 +82,39 @@ export function ReviewList({
             />
           </div>
           <div className="flex items-center gap-4 sm:gap-6 sm:px-4">
-            <label className="flex cursor-pointer items-center gap-2 font-ibm text-sm">
-              <input
+            <label
+              className="flex cursor-pointer items-center gap-2 font-ibm text-sm"
+              htmlFor="filter-reviewed"
+            >
+              <Checkbox
                 checked={reviewed}
-                className="size-4"
-                onChange={(e) => setReviewed(e.target.checked)}
-                type="checkbox"
+                id="filter-reviewed"
+                onCheckedChange={(checked) => setReviewed(checked === true)}
+                size="sm"
               />
               Reviewed
             </label>
-            <label className="flex cursor-pointer items-center gap-2 font-ibm text-sm">
-              <input
+            <label
+              className="flex cursor-pointer items-center gap-2 font-ibm text-sm"
+              htmlFor="filter-wifi"
+            >
+              <Checkbox
                 checked={wifi}
-                className="size-4"
-                onChange={(e) => setWifi(e.target.checked)}
-                type="checkbox"
+                id="filter-wifi"
+                onCheckedChange={(checked) => setWifi(checked === true)}
+                size="sm"
               />
               Wi-fi
             </label>
-            <label className="flex cursor-pointer items-center gap-2 font-ibm text-sm">
-              <input
+            <label
+              className="flex cursor-pointer items-center gap-2 font-ibm text-sm"
+              htmlFor="filter-food"
+            >
+              <Checkbox
                 checked={food}
-                className="size-4"
-                onChange={(e) => setFood(e.target.checked)}
-                type="checkbox"
+                id="filter-food"
+                onCheckedChange={(checked) => setFood(checked === true)}
+                size="sm"
               />
               Food
             </label>
@@ -112,15 +123,18 @@ export function ReviewList({
             <label className="font-ibm text-sm" htmlFor="review-sort">
               Sort:
             </label>
-            <select
-              className="border border-border bg-background px-2 py-1.5 font-ibm text-sm outline-none focus:border-primary"
-              id="review-sort"
-              onChange={(e) => setSort(e.target.value as SortOption)}
+            <Select
+              onValueChange={(value) => setSort(value as SortOption)}
               value={sort}
             >
-              <option value="latest">Latest</option>
-              <option value="nearme">Near me</option>
-            </select>
+              <Select.Trigger aria-label="Sort reviews" id="review-sort">
+                <Select.Value placeholder="Sort" />
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Item value="latest">Latest</Select.Item>
+                <Select.Item value="nearme">Near me</Select.Item>
+              </Select.Content>
+            </Select>
           </div>
         </div>
       )}

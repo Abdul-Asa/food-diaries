@@ -3,6 +3,8 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
 import { Marquee } from "@/components/marquee";
+import { Badge } from "@/components/retroui/badge";
+import { Button } from "@/components/retroui/button";
 import { ScoreCard } from "@/components/score-card";
 import type { ScoreCard as ScoreCardType } from "@/lib/types";
 
@@ -46,9 +48,13 @@ function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.6, delay: 0.5, ease: EASE_SMOOTH }}
         >
-          <span className="inline-block border-2 border-border px-3 py-1 font-ibm text-[10px] text-muted-foreground uppercase tracking-[0.25em] shadow-xs">
+          <Badge
+            className="font-ibm text-[10px] uppercase tracking-[0.25em]"
+            size="sm"
+            variant="outline"
+          >
             Southampton
-          </span>
+          </Badge>
         </motion.div>
 
         {/* Title */}
@@ -105,18 +111,12 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.7, ease: EASE_SMOOTH }}
         >
-          <Link
-            className="border-2 border-border bg-primary px-5 py-2.5 font-bold text-primary-foreground shadow-md transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
-            href="/reviews"
-          >
-            Read Reviews
-          </Link>
-          <Link
-            className="border-2 border-border bg-card px-5 py-2.5 font-bold text-foreground shadow-md transition-all duration-200 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
-            href="/about"
-          >
-            About &rarr;
-          </Link>
+          <Button asChild variant="default">
+            <Link href="/reviews">Read Reviews</Link>
+          </Button>
+          <Button asChild variant="secondary">
+            <Link href="/about">About &rarr;</Link>
+          </Button>
         </motion.div>
       </div>
 
