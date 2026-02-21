@@ -10,10 +10,10 @@ const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const FEATURED_SCORE: ScoreCardType = {
-  overall: 92,
+  overall: 100,
   quality: 5,
-  aesthetic: 4,
-  price: "££",
+  aesthetic: 5,
+  price: "£",
   value: "Good",
 };
 
@@ -290,11 +290,11 @@ function StatsBar() {
 export function HeroPage() {
   return (
     <div className="flex flex-col">
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="mx-auto w-full max-w-6xl">
         <HeroSection />
       </div>
       <MarqueeStrip />
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="mx-auto w-full max-w-6xl">
         <FeaturedReview />
         <StatsBar />
       </div>
