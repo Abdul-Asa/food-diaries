@@ -156,7 +156,7 @@ export function Header() {
         className="fixed top-0 right-0 left-0 z-40 h-4 bg-background"
       />
 
-      <nav className="fixed top-4 right-1 left-1 z-50 border-border border-y-2 bg-background sm:right-4 sm:left-4">
+      <nav className="fixed top-4 right-4 left-4 z-50 border-border border-y-2 bg-background">
         <div className="mx-auto flex h-12 items-stretch justify-between">
           <Link
             className="flex h-full items-stretch no-underline outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"

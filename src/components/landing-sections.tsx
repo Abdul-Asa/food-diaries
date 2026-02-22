@@ -63,10 +63,14 @@ function useReveal(once = true) {
 
 function HeroIntro() {
   const { scrollY } = useScroll();
+  const constraintsRef = useRef<HTMLDivElement>(null);
   const cardY = useTransform(scrollY, [0, 600], [0, -120]);
 
   return (
-    <section className="relative flex min-h-[calc(100vh-9rem)] flex-col justify-between gap-10 py-12 md:flex-row md:items-center md:gap-12 lg:gap-16">
+    <section
+      className="relative flex min-h-[calc(100vh-9rem)] flex-col justify-between gap-10 py-12 md:flex-row md:items-center md:gap-12 lg:gap-16"
+      ref={constraintsRef}
+    >
       {/* Left */}
       <div className="flex shrink-0 flex-col items-center gap-5 text-center md:items-start md:text-left">
         {/* Location badge */}
@@ -152,6 +156,7 @@ function HeroIntro() {
         animate={{ opacity: 1, y: 0 }}
         className="flex cursor-grab justify-center active:cursor-grabbing md:justify-end"
         drag
+        dragConstraints={constraintsRef}
         dragElastic={0.12}
         dragSnapToOrigin
         initial={{ opacity: 0, y: 40 }}
@@ -240,7 +245,7 @@ function MarqueeStrip() {
 export function HeroSection() {
   return (
     <div className="flex flex-col">
-      <div className="mx-auto my-4 w-full border-2 border-border">
+      <div className="mx-auto my-4 w-full border-2 border-border p-1 sm:p-4">
         <div className="mx-auto w-full max-w-6xl">
           <HeroIntro />
         </div>
