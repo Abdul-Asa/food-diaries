@@ -1,7 +1,12 @@
 import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import type { ComponentType } from "react";
-import type { ReviewDisplay, ReviewFrontmatter } from "@/lib/types";
+import type {
+  PriceTier,
+  ReviewDisplay,
+  ReviewFrontmatter,
+  ValueLabel,
+} from "@/lib/types";
 
 interface ReviewModule {
   default: ComponentType;
@@ -77,17 +82,8 @@ const parseFrontmatter = (
     return null;
   }
 
-  const {
-    title,
-    date,
-    address,
-    review,
-    thumbnail,
-    cover,
-    hours,
-    coords,
-    type,
-  } = value;
+  const { title, date, address, review, thumbnail, hours, coords, type } =
+    value;
   if (!(isString(title) && isString(date) && isString(address))) {
     return null;
   }
@@ -131,11 +127,10 @@ const parseFrontmatter = (
       overall,
       aesthetic,
       quality,
-      price,
-      value: scoreValue,
+      price: price as PriceTier,
+      value: scoreValue as ValueLabel,
     },
     thumbnail: resolveImage(slug, thumbnail),
-    cover: resolveImage(slug, cover),
     hours: isString(hours) ? hours : undefined,
     coords: parsedCoords,
     type: isString(type) ? type : undefined,
@@ -208,7 +203,6 @@ export const toReviewDisplay = (review: Review): ReviewDisplay => {
     coords: frontmatter.coords,
     date: frontmatter.date,
     thumbnail: frontmatter.thumbnail ?? null,
-    cover: frontmatter.cover ?? null,
     score: frontmatter.review,
   };
 };

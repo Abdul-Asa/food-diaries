@@ -1,20 +1,18 @@
-import { HeroPage } from "@/components/hero-content";
-import { LandingSections } from "@/components/landing-sections";
-import { getRecentReviews, toReviewDisplay } from "@/lib/reviews";
+import { HeroSection, Scoring } from "@/components/landing-sections";
+import { ReviewList } from "@/components/review-list";
+import { getAllReviews, toReviewDisplay } from "@/lib/reviews";
 
 export default async function Home() {
-  const reviews = await getRecentReviews(4);
-  const recentReviews = reviews.map((review) => ({
+  const allReviews = await getAllReviews();
+  const items = allReviews.map((review) => ({
     slug: review.slug,
     display: toReviewDisplay(review),
   }));
-
   return (
     <>
-      <HeroPage />
-      <div className="mx-auto w-full max-w-6xl">
-        <LandingSections recentReviewItems={recentReviews} />
-      </div>
+      <HeroSection />
+      <Scoring />
+      <ReviewList items={items} />
     </>
   );
 }

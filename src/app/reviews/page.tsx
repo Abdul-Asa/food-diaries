@@ -21,10 +21,10 @@ export default async function ReviewsPage() {
           All reviews
         </span>
         <h1 className="mt-2 font-bold font-poppins text-3xl tracking-tight md:text-4xl">
-          Kebab spots in Southampton
+          Kebab spots reviewed
         </h1>
         <p className="mt-3 font-ibm text-muted-foreground text-sm">
-          Every spot we&apos;ve tried, scored and reviewed. No fluff.
+          Every spot I&apos;ve tried. Both in person and delivery.
         </p>
       </header>
 

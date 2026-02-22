@@ -11,7 +11,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-border border-t-2 bg-card">
+    <footer className="mt-8 border-2 border-border">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-12 md:flex-row md:items-start md:justify-between md:gap-8">
         {/* Brand */}
         <div className="flex flex-col gap-4">
@@ -30,8 +30,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="max-w-xs font-ibm text-muted-foreground text-sm leading-relaxed">
-            Your guide to the tastiest kebab spots in Southampton. Honest
-            reviews, no sponsorships.
+            Unholy amounts of kebabs were eaten in the making of these reviews.
           </p>
         </div>
 
@@ -39,7 +38,7 @@ export function Footer() {
         <div className="flex flex-col gap-8 sm:flex-row sm:gap-12">
           <nav aria-label="Footer navigation">
             <span className="font-ibm text-[10px] text-muted-foreground uppercase tracking-[0.25em]">
-              Explore
+              Navigation
             </span>
             <ul className="mt-3 flex flex-col gap-2">
               {FOOTER_LINKS.map((link) => (
@@ -54,17 +53,6 @@ export function Footer() {
               ))}
             </ul>
           </nav>
-
-          <div>
-            <span className="font-ibm text-[10px] text-muted-foreground uppercase tracking-[0.25em]">
-              Location
-            </span>
-            <p className="mt-3 font-ibm text-muted-foreground text-sm">
-              Southampton
-              <br />
-              SO14 &ndash; SO17
-            </p>
-          </div>
         </div>
       </div>
 
@@ -72,21 +60,21 @@ export function Footer() {
       <div className="border-border border-t-2 bg-background">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
           <p className="font-ibm text-muted-foreground text-xs">
-            &copy; {year} Saints Food Diary. No kebabs were harmed in the making
-            of these reviews.
+            &copy; {year}, Saints Food Diary. Made with love by{" "}
+            <a
+              className="font-bold text-foreground underline decoration-border underline-offset-2 transition-colors hover:text-primary"
+              href="https://asa-dev.vercel.app"
+            >
+              Shehu
+            </a>
+            .
           </p>
           <div className="flex items-center gap-6">
             <Link
               className="font-ibm text-muted-foreground text-xs underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
-              href="/privacy"
+              href="/disclaimers"
             >
-              Privacy
-            </Link>
-            <Link
-              className="font-ibm text-muted-foreground text-xs underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
-              href="/contact"
-            >
-              Get in touch
+              Disclaimers
             </Link>
           </div>
         </div>

@@ -9,9 +9,9 @@ export type ValueLabel = "Amazing Deal" | "Good" | "Okay" | "Not worth";
 export interface ReviewScore {
   aesthetic: number;
   overall: number;
-  price: PriceTier | string;
+  price: PriceTier;
   quality: number;
-  value: ValueLabel | string;
+  value: ValueLabel;
 }
 
 export interface ReviewFrontmatter {
@@ -20,7 +20,6 @@ export interface ReviewFrontmatter {
     latitude: number;
     longitude: number;
   };
-  cover?: string;
   date: string;
   hours?: string;
   review: ReviewScore;
@@ -34,10 +33,14 @@ export interface ReviewDisplay {
     latitude: number;
     longitude: number;
   };
-  cover: string | null;
   date: string;
   location: string;
   score: ReviewScore;
   thumbnail: string | null;
   title: string;
+}
+
+export interface ReviewListItem {
+  display: ReviewDisplay;
+  slug: string;
 }

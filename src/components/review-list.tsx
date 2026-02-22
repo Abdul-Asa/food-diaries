@@ -3,10 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { Select } from "@/components/retroui/select";
 import { ReviewCard } from "@/components/review-card";
-import type { ReviewDisplay } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import type { ReviewListItem } from "@/lib/types";
 
-type SortOption = "latest" | "nearme";
+type SortOption = "latest" | "nearme" | "cheapest" | "rating";
 type GeoStatus = "idle" | "loading" | "ready" | "error";
 
 interface Coordinates {
@@ -37,30 +36,18 @@ const getDistanceInKm = (
   return earthRadiusKm * centralAngle;
 };
 
-interface ReviewListItem {
-  display: ReviewDisplay;
-  slug: string;
-}
-
-interface ReviewListProps {
-  className?: string;
-  /** If true, hide filter bar (e.g. for landing "Recent reviews"). */
-  compact?: boolean;
-  items: ReviewListItem[];
-}
-
-export function ReviewList({
-  items,
-  className,
-  compact = false,
-}: ReviewListProps) {
+export function ReviewList({ items }: { items: ReviewListItem[] }) {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortOption>("latest");
   const [geoStatus, setGeoStatus] = useState<GeoStatus>("idle");
   const [userCoords, setUserCoords] = useState<Coordinates | null>(null);
 
   useEffect(() => {
-    if (sort !== "nearme" || userCoords !== null || geoStatus === "loading") {
+    if (
+      (sort !== "nearme" && sort !== "cheapest" && sort !== "rating") ||
+      userCoords !== null ||
+      geoStatus === "loading"
+    ) {
       return;
     }
 
@@ -109,47 +96,56 @@ export function ReviewList({
       });
     }
 
+    if (sort === "cheapest") {
+      return sorted.sort((a, b) => {
+        return a.display.score.price.localeCompare(b.display.score.price);
+      });
+    }
+
+    if (sort === "rating") {
+      return sorted.sort((a, b) => {
+        return b.display.score.overall - a.display.score.overall;
+      });
+    }
+
     return sorted;
   }, [items, search, sort, userCoords]);
 
   return (
-    <div className={cn("flex flex-col gap-4", className)}>
-      {!compact && (
-        <div className="flex flex-wrap items-center gap-2 border-2 border-border bg-card p-2 sm:gap-3">
-          <div className="w-full sm:flex-1">
-            <input
-              aria-label="Search reviews"
-              className="h-9 w-full border border-border bg-background px-3 font-ibm text-sm outline-none focus:border-primary"
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search..."
-              type="search"
-              value={search}
-            />
-          </div>
-          <Select
-            onValueChange={(value) => setSort(value as SortOption)}
-            value={sort}
-          >
-            <Select.Trigger
-              aria-label="Sort reviews"
-              className="w-full sm:w-40"
-            >
-              <Select.Value placeholder="Sort" />
-            </Select.Trigger>
-            <Select.Content>
-              <Select.Item value="latest">Latest</Select.Item>
-              <Select.Item value="nearme">Near me</Select.Item>
-            </Select.Content>
-          </Select>
-          {sort === "nearme" && geoStatus === "error" ? (
-            <p className="w-full font-ibm text-muted-foreground text-xs sm:text-right">
-              Location unavailable, showing latest instead.
-            </p>
-          ) : null}
+    <div className="flex flex-col gap-4 border-2 border-border">
+      <div className="flex flex-wrap items-center gap-2 border-border border-b-2 bg-card p-2 sm:gap-3">
+        <div className="w-full sm:flex-1">
+          <input
+            aria-label="Search reviews"
+            className="h-9 w-full border border-border bg-background px-3 font-ibm text-sm outline-none focus:border-primary"
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search..."
+            type="search"
+            value={search}
+          />
         </div>
-      )}
+        <Select
+          onValueChange={(value) => setSort(value as SortOption)}
+          value={sort}
+        >
+          <Select.Trigger aria-label="Sort reviews" className="w-full sm:w-40">
+            <Select.Value placeholder="Sort" />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Item value="latest">Latest</Select.Item>
+            <Select.Item value="nearme">Near me</Select.Item>
+            <Select.Item value="cheapest">Cheapest</Select.Item>
+            <Select.Item value="rating">Rating</Select.Item>
+          </Select.Content>
+        </Select>
+        {sort === "nearme" && geoStatus === "error" ? (
+          <p className="w-full font-ibm text-muted-foreground text-xs sm:text-right">
+            Location unavailable, showing latest instead.
+          </p>
+        ) : null}
+      </div>
 
-      <ul className="flex flex-col gap-2">
+      <ul className="mx-auto flex w-full max-w-6xl flex-col gap-2 pb-8">
         {filteredAndSorted.map((item) => (
           <li key={item.slug}>
             <ReviewCard display={item.display} slug={item.slug} />

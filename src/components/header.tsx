@@ -151,7 +151,12 @@ export function Header() {
 
   return (
     <>
-      <nav className="relative z-50 border-border border-y-2 bg-background">
+      <div
+        aria-hidden
+        className="fixed top-0 right-0 left-0 z-40 h-4 bg-background"
+      />
+
+      <nav className="fixed top-4 right-4 left-4 z-50 border-border border-y-2 bg-background">
         <div className="mx-auto flex h-12 items-stretch justify-between">
           <Link
             className="flex h-full items-stretch no-underline outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"

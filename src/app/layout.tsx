@@ -19,7 +19,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: "Saints Food Diary",
-  description: "A food diary for saints",
+  description: "One student's kebab reviews in Southampton",
 };
 
 export default function RootLayout({
@@ -30,9 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(poppins.variable, ibmPlexMono.variable)}>
-        <main className="flex min-h-screen flex-col p-4">
+        <main className="flex min-h-screen flex-col justify-between p-4 pt-16">
           <Header />
-          {children}
+          <div className="size-full flex-1">{children}</div>
           <Footer />
         </main>
       </body>
