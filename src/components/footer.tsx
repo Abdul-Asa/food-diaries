@@ -65,7 +65,7 @@ export function Footer() {
               className="font-bold text-foreground underline decoration-border underline-offset-2 transition-colors hover:text-primary"
               href="https://asa-dev.vercel.app"
             >
-              Shehu
+              Asa
             </a>
             .
           </p>

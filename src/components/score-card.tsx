@@ -10,7 +10,7 @@ interface ScoreCardProps {
 
 function StatItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-1 text-center">
       <span className="font-ibm font-semibold text-[clamp(0.8rem,1.2vw,1.05rem)]">
         {label}
       </span>
