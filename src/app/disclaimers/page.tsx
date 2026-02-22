@@ -3,8 +3,7 @@ import DisclaimersContent from "@/content/disclaimers.mdx";
 
 export const metadata: Metadata = {
   title: "Disclaimers",
-  description:
-    "Personal project, no sponsorship, no malice. How Saints Food Diary works.",
+  description: "How Saints Food Diary works.",
   alternates: { canonical: "/disclaimers" },
 };
 

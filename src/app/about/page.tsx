@@ -3,8 +3,7 @@ import AboutContent from "@/content/about.mdx";
 
 export const metadata: Metadata = {
   title: "About",
-  description:
-    "Who I am and how I review kebab spots in Southampton. No sponsorships, no fluff.",
+  description: "Everything you need to know about Saints Food Diary.",
   alternates: { canonical: "/about" },
 };
 

@@ -4,8 +4,7 @@ import { getAllReviews, toReviewDisplay } from "@/lib/reviews";
 
 export const metadata: Metadata = {
   title: "Reviews",
-  description:
-    "Honest kebab spot reviews in Southampton. Quality, aesthetic, price, and value — no sponsorships.",
+  description: "My food diary of kebab spots in Southampton.",
   alternates: { canonical: "/reviews" },
 };
 

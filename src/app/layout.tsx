@@ -35,11 +35,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Saints Food Diary — Kebab reviews in Southampton",
+    default: "Saints Food Diary",
     template: "%s | Saints Food Diary",
   },
-  description:
-    "Honest kebab spot reviews in Southampton. Quality, aesthetic, price, and value — one student's diary, no sponsorships.",
+  description: "My food diary of kebab spots in Southampton.",
   keywords: [
     "kebab",
     "Southampton",
@@ -52,9 +51,8 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: baseUrl,
     siteName: "Saints Food Diary",
-    title: "Saints Food Diary — Kebab reviews in Southampton",
-    description:
-      "Honest kebab spot reviews in Southampton. Quality, aesthetic, price, and value — no sponsorships.",
+    title: "Saints Food Diary — Kebab reviews",
+    description: "My food diary of kebab spots in Southampton.",
     images: [
       {
         url: "/og-image.png",
@@ -66,8 +64,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Saints Food Diary — Kebab reviews in Southampton",
-    description: "Honest kebab spot reviews in Southampton. No sponsorships.",
+    title: "Saints Food Diary — Kebab reviews",
+    description: "My food diary of kebab spots in Southampton.",
     images: ["/og-image.png"],
   },
   alternates: {
@@ -84,8 +82,7 @@ const websiteSchema = {
   "@type": "WebSite",
   name: "Saints Food Diary",
   url: baseUrl,
-  description:
-    "Honest kebab spot reviews in Southampton. Quality, aesthetic, price, and value — one student's diary, no sponsorships.",
+  description: "My food diary of kebab spots in Southampton.",
   inLanguage: "en-GB",
   publisher: {
     "@type": "Person",
@@ -102,7 +99,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(poppins.variable, ibmPlexMono.variable)}>
         <JsonLd data={websiteSchema} />
-        <main className="flex min-h-screen flex-col justify-between px-4 pt-16">
+        <main className="flex min-h-screen flex-col justify-between px-4 pt-16 pb-8">
           <Header />
           <div className="size-full flex-1">{children}</div>
           <Footer />

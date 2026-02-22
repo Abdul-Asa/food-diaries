@@ -10,8 +10,7 @@ export default function NotFound() {
         Page not found
       </h1>
       <p className="mt-4 max-w-md font-ibm text-muted-foreground text-sm">
-        This kebab doesn&apos;t exist. Maybe it was taken off the menu, or you
-        took a wrong turn on Portswood Road.
+        This page doesn&apos;t exist. Maybe it was taken off the menu.
       </p>
       <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
         <Link
