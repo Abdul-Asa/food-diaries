@@ -1,40 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { NormalizedReviewDisplay } from "@/lib/types";
+import type { ReviewDisplay } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 interface ReviewCardProps {
   className?: string;
-  display: NormalizedReviewDisplay;
+  display: ReviewDisplay;
   slug: string;
 }
 
-function RatingLine({ display }: { display: NormalizedReviewDisplay }) {
-  const parts: string[] = [];
+function RatingLine({ display }: { display: ReviewDisplay }) {
   const { score } = display;
-  if (score.coffee !== null) {
-    parts.push(`Coffee ${score.coffee}/5`);
-  }
-  if (score.aesthetic !== null) {
-    parts.push(`Aesthetic ${score.aesthetic}/5`);
-  }
-  if (score.seating !== null) {
-    parts.push(`Seating ${score.seating}/5`);
-  }
-  if (parts.length === 0) {
-    return null;
-  }
   return (
     <p className="font-ibm text-muted-foreground text-sm">
-      {parts.join(" · ")}
+      {`Quality ${score.quality}/5 · Aesthetic ${score.aesthetic}/5`}
     </p>
   );
 }
 
 export function ReviewCard({ slug, display, className }: ReviewCardProps) {
-  const tagsLine = [display.priceTag, ...display.tags]
-    .filter(Boolean)
-    .join(" · ");
+  const tagsLine = `${display.score.price} · ${display.score.value}`;
 
   return (
     <Link
@@ -70,9 +55,7 @@ export function ReviewCard({ slug, display, className }: ReviewCardProps) {
         <p className="font-ibm text-muted-foreground text-sm">
           {display.location}
         </p>
-        {tagsLine ? (
-          <p className="font-ibm text-muted-foreground text-sm">{tagsLine}</p>
-        ) : null}
+        <p className="font-ibm text-muted-foreground text-sm">{tagsLine}</p>
         <RatingLine display={display} />
       </div>
     </Link>

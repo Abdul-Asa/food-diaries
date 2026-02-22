@@ -1,5 +1,4 @@
 import type { MDXComponents } from "mdx/types";
-import { Counter } from "@/components/counter";
 
 const components: MDXComponents = {
   h1: ({ children }) => (
@@ -7,7 +6,6 @@ const components: MDXComponents = {
       {children}
     </h1>
   ),
-  Counter,
   // Inline MDX images: use native img so arbitrary markdown image props work; Next Image requires known dimensions
   img: (props) => (
     // biome-ignore lint/performance/noImgElement: MDX inline images use dynamic src; Next/Image requires known dimensions at build time

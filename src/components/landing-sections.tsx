@@ -4,7 +4,7 @@ import { motion, useInView } from "motion/react";
 import Link from "next/link";
 import { useRef } from "react";
 import { ReviewList } from "@/components/review-list";
-import type { NormalizedReviewDisplay } from "@/lib/types";
+import type { ReviewDisplay } from "@/lib/types";
 
 const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -128,7 +128,7 @@ export function CtaSection() {
 }
 
 interface RecentReviewItem {
-  display: NormalizedReviewDisplay;
+  display: ReviewDisplay;
   slug: string;
 }
 

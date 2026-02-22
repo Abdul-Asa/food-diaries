@@ -1,11 +1,11 @@
 "use client";
 
-import type { ScoreCard as ScoreCardType } from "@/lib/types";
+import type { ReviewScore } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 interface ScoreCardProps {
   className?: string;
-  score: ScoreCardType;
+  score: ReviewScore;
 }
 
 function StatItem({ label, value }: { label: string; value: string }) {

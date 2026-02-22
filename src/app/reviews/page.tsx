@@ -1,5 +1,5 @@
 import { ReviewList } from "@/components/review-list";
-import { getAllReviews, normalizeReviewDisplay } from "@/lib/reviews";
+import { getAllReviews, toReviewDisplay } from "@/lib/reviews";
 
 export const metadata = {
   title: "Reviews",
@@ -7,11 +7,11 @@ export const metadata = {
     "Honest kebab spot reviews in Southampton. Quality, aesthetic, price, and value — no sponsorships.",
 };
 
-export default function ReviewsPage() {
-  const allReviews = getAllReviews();
+export default async function ReviewsPage() {
+  const allReviews = await getAllReviews();
   const items = allReviews.map((review) => ({
     slug: review.slug,
-    display: normalizeReviewDisplay(review),
+    display: toReviewDisplay(review),
   }));
 
   return (

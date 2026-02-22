@@ -1,11 +1,12 @@
 import { HeroPage } from "@/components/hero-content";
 import { LandingSections } from "@/components/landing-sections";
-import { getRecentReviews, normalizeReviewDisplay } from "@/lib/reviews";
+import { getRecentReviews, toReviewDisplay } from "@/lib/reviews";
 
-export default function Home() {
-  const recentReviews = getRecentReviews(4).map((review) => ({
+export default async function Home() {
+  const reviews = await getRecentReviews(4);
+  const recentReviews = reviews.map((review) => ({
     slug: review.slug,
-    display: normalizeReviewDisplay(review),
+    display: toReviewDisplay(review),
   }));
 
   return (

@@ -6,7 +6,7 @@ import { Marquee } from "@/components/marquee";
 import { Badge } from "@/components/retroui/badge";
 import { Button } from "@/components/retroui/button";
 import { ScoreCard } from "@/components/score-card";
-import type { ScoreCard as ScoreCardType } from "@/lib/types";
+import type { ReviewScore } from "@/lib/types";
 
 const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const EASE_SMOOTH: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -32,7 +32,7 @@ const HERO_SCORE_CARD = {
   price: "££",
   quality: 4,
   value: "Amazing Deal",
-} satisfies ScoreCardType;
+} satisfies ReviewScore;
 
 function HeroSection() {
   const { scrollY } = useScroll();

@@ -1,58 +1,48 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { CafeScoreCard } from "@/components/cafe-score-card";
-import { getReviewBySlug } from "@/content/reviews/registry";
-import {
-  getAllReviews,
-  getNormalizedScore,
-  normalizeReviewDisplay,
-} from "@/lib/reviews";
-import type { ReviewFrontmatter } from "@/lib/types";
+import { ScoreCard } from "@/components/score-card";
+import { getAllReviews, getReviewBySlug, toReviewDisplay } from "@/lib/reviews";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return getAllReviews().map((r) => ({ slug: r.slug }));
+  const reviews = await getAllReviews();
+  return reviews.map((review) => ({ slug: review.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const entry = getReviewBySlug(slug);
-  if (!entry) {
+  const review = await getReviewBySlug(slug);
+  if (!review) {
     return { title: "Review not found" };
   }
-  const f = entry.frontmatter as ReviewFrontmatter & {
-    title?: string;
-    excerpt?: string;
-  };
-  const title = f.title ?? f.name;
-  const description = f.excerpt ?? (f as ReviewFrontmatter).excerpt;
+
+  const title = review.frontmatter.title;
   return {
     title: `${title} | Reviews`,
-    description,
+    description: `Review for ${title} in Southampton.`,
   };
 }
 
 export default async function ReviewDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const entry = getReviewBySlug(slug);
-  if (!entry) {
+  const review = await getReviewBySlug(slug);
+  if (!review) {
     notFound();
   }
 
-  const { Component, frontmatter } = entry;
-  const review = { frontmatter, slug };
-  const display = normalizeReviewDisplay(review);
-  const score = getNormalizedScore(review);
+  const { Component } = review;
+  const display = toReviewDisplay(review);
+  const heroSrc = display.cover ?? display.thumbnail;
 
   return (
     <article className="mx-auto max-w-6xl px-4 py-8">
-      {display.cover ? (
+      {heroSrc ? (
         <div className="relative mb-8 aspect-21/9 w-full overflow-hidden border-2 border-border bg-muted">
           <Image
             alt=""
@@ -60,7 +50,7 @@ export default async function ReviewDetailPage({ params }: PageProps) {
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 1152px"
-            src={display.cover}
+            src={heroSrc}
           />
         </div>
       ) : null}
@@ -75,7 +65,7 @@ export default async function ReviewDetailPage({ params }: PageProps) {
       </header>
 
       <div className="mb-10 flex justify-center">
-        <CafeScoreCard className="w-full max-w-3xl" score={score} />
+        <ScoreCard className="w-full max-w-3xl" score={display.score} />
       </div>
 
       <div className="prose dark:prose-invert max-w-none">
