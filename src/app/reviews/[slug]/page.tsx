@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { JsonLd } from "@/components/seo/json-ld";
 import { ScoreCard } from "@/components/score-card";
+import { JsonLd } from "@/components/seo/json-ld";
 import { getAllReviews, getReviewBySlug, toReviewDisplay } from "@/lib/reviews";
 
 interface PageProps {
@@ -43,7 +43,9 @@ export async function generateMetadata({
       images: thumbnail
         ? [
             {
-              url: thumbnail.startsWith("http") ? thumbnail : `${baseUrl}${thumbnail}`,
+              url: thumbnail.startsWith("http")
+                ? thumbnail
+                : `${baseUrl}${thumbnail}`,
               width: 1200,
               height: 630,
               alt: title,

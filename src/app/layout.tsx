@@ -67,8 +67,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Saints Food Diary — Kebab reviews in Southampton",
-    description:
-      "Honest kebab spot reviews in Southampton. No sponsorships.",
+    description: "Honest kebab spot reviews in Southampton. No sponsorships.",
     images: ["/og-image.png"],
   },
   alternates: {
