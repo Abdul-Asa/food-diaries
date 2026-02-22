@@ -1,10 +1,12 @@
+import type { Metadata } from "next";
 import { ReviewList } from "@/components/review-list";
 import { getAllReviews, toReviewDisplay } from "@/lib/reviews";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Reviews",
   description:
     "Honest kebab spot reviews in Southampton. Quality, aesthetic, price, and value — no sponsorships.",
+  alternates: { canonical: "/reviews" },
 };
 
 export default async function ReviewsPage() {

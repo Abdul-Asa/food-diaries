@@ -1,9 +1,11 @@
+import type { Metadata } from "next";
 import ContactContent from "@/content/contact.mdx";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Contact",
   description:
     "Get in touch with Saints Food Diary. Suggestions, spot tips, or say hello.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
