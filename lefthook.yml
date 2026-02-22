@@ -9,5 +9,4 @@ pre-push:
         - "**/*.json"
         - "**/*.jsonc"
         - "**/*.css"
-      stage_fixed: true
     - run: bun typecheck

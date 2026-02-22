@@ -156,7 +156,7 @@ export function Header() {
         className="fixed top-0 right-0 left-0 z-40 h-4 bg-background"
       />
 
-      <nav className="fixed top-4 right-4 left-4 z-50 border-border border-y-2 bg-background">
+      <nav className="fixed top-4 right-1 left-1 z-50 border-border border-y-2 bg-background sm:right-4 sm:left-4">
         <div className="mx-auto flex h-12 items-stretch justify-between">
           <Link
             className="flex h-full items-stretch no-underline outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -164,15 +164,16 @@ export function Header() {
             onClick={closeMenu}
           >
             <div className="flex border-border border-l-2">
-              <div className="flex aspect-square items-center justify-center border-border border-r-2 bg-card px-2">
+              <div className="flex min-w-14 shrink-0 items-center justify-center border-border border-r-2 bg-card pr-2 pl-3 md:aspect-square md:min-w-0 md:px-2">
                 <Image
                   alt="Saints Food Diary logo"
+                  className="h-9 w-9 object-contain md:h-[50px] md:w-[50px]"
                   height={50}
                   src="/icons/logo.png"
                   width={50}
                 />
               </div>
-              <div className="flex animate-colors items-center justify-center border-border border-r-2 bg-card px-4 text-foreground text-lg hover:bg-primary hover:text-primary-foreground">
+              <div className="flex animate-colors items-center justify-center border-border border-r-2 bg-card px-3 text-base text-foreground hover:bg-primary hover:text-primary-foreground md:px-4 md:text-lg">
                 <span className="font-bold">Food diaries</span>
               </div>
             </div>

@@ -102,7 +102,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(poppins.variable, ibmPlexMono.variable)}>
         <JsonLd data={websiteSchema} />
-        <main className="flex min-h-screen flex-col justify-between p-4 pt-16">
+        <main className="flex min-h-screen flex-col justify-between px-1 pt-16 sm:px-4">
           <Header />
           <div className="size-full flex-1">{children}</div>
           <Footer />
